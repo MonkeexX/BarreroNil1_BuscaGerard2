@@ -1,7 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include "HeaderPokeenti.h"
-#define MAPSIZE 100
+#define MAPSIZE 20
 #define MAXPOKEMON 200
 #define KEY_UP 72
 #define KEY_DOWN 80
@@ -19,39 +19,28 @@ void main()
 	int* Ypointer = &Y;
 	int number = 10;
 	int input = 0;
-	
-	
-	for (int i = 0; i < MAPSIZE; i++)
-	{
-		for (int j = 0; j < MAPSIZE; j++)
-		{
-			mapa[i][j] = ' ';
-		}
-		//return map;
-	}
-
-	for (int i = 0; i < MAPSIZE; i++)
-	{
-		for (int j = 0; j < MAPSIZE; j++)
-		{
-			mapa[i][MAPSIZE / 2] = 'X';
-			mapa[MAPSIZE / 2][i] = 'X';
-		}
-		//return map;
-	}
+	int counterI = 0;
+	int counterJ = 0;
 	
 
-	for (int i = 0; i < MAPSIZE; i++)
+
+
+
+	//TODO: print the pokemons
+	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
 	{
-		for (int j = 0; j < MAPSIZE; i++)
+		int posX = 1;
+		int posY = 1;
+		if (mapa[posX][posY] == ' ')
 		{
-			std::cout << mapa[i][j] << "0";
-			if (j == MAPSIZE)
-			{
-				std::cout << "\n";
-			}
+			mapa[posX][posY] = 'P';
 		}
 	}
+	PrintMap(mapa);
+	//AddPokemonToMap(number, pMapa);
+	
+
+	
 
 	
 }

@@ -25,7 +25,7 @@ char* mapSice;
 //}
 //}
 
-void MapInitiation(char* map [MAPSIZE][MAPSIZE])
+void MapInitiation(char** map [MAPSIZE][MAPSIZE])
 {
 
 
@@ -34,8 +34,8 @@ void MapInitiation(char* map [MAPSIZE][MAPSIZE])
 
 	for (int i = 0; i < MAPSIZE; i++)
 	{
-		*map[i][MAPSIZE / 2] = 'X';
-		*map[MAPSIZE / 2][i] = 'X';
+		**map[i][MAPSIZE / 2] = 'X';
+		**map[MAPSIZE / 2][i] = 'X';
 
 		//return map;
 	}
@@ -147,7 +147,7 @@ int CharacterMovement(int input)
 	//falta el exit
 }
 
-void PrintMap(char map[MAPSIZE][MAPSIZE])
+void PrintMap(char** map)
 {
 	int counterI = 0;
 	int counterJ = 0;
@@ -160,20 +160,20 @@ void PrintMap(char map[MAPSIZE][MAPSIZE])
 			counterJ++;
 			if (i == MAPSIZE / 2)
 			{
-				map[j][i] = 'X';
+				//**map[j][i] = 'X';
 				counterI = 0;
 
 			}
 			else if (j == MAPSIZE / 2)
 			{
-				map[j][i] = 'X';
+				//**map[j][i] = 'X';
 				counterJ = 0;
 			}
 			else
 			{
-				map[j][i] = ' ';
+				//**map[j][i] = ' ';
 			}
-			std::cout << map[j][i];
+			std::cout; // << //**map[j][i];
 		}
 		std::cout << "\n";
 		//return map;

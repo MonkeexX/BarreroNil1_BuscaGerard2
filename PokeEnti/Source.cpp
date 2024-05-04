@@ -47,22 +47,17 @@ void main()
 	//TODO: print the pokemons
 	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
 	{
-		int posX = rand() % 5;
-		int posY = rand() % 5;
+		int posX = rand() % MAPSIZE;
+		int posY = rand() % MAPSIZE;
 		if (mapa[posX][posY] != 'X' && mapa[posX][posY] != 'P')
 		{
 			mapa[posX][posY] = 'P';
 			std::cout << "Poke in:" << posX << posY << "\n";
 		}
-		if (mapa[posX][posY] == 'P')
-		{
-			pokemonGenerated--;
-		}
+		
 		
 	}
 
-	int counterI = 0;
-	int counterJ = 0;
 	for (int i = 0; i < MAPSIZE; i++)
 	{
 		counterI++;

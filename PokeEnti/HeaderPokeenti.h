@@ -164,6 +164,10 @@ void PrintMap(char map[MAPSIZE][MAPSIZE])
 				counterI = 0;
 
 			}
+			else if (map[i][j] == 'P')
+			{
+				map[j][i] = 'P';
+			}
 			else if (j == MAPSIZE / 2)
 			{
 				map[j][i] = 'X';
@@ -176,8 +180,6 @@ void PrintMap(char map[MAPSIZE][MAPSIZE])
 			std::cout << map[j][i];
 		}
 		std::cout << "\n";
-		//return map;
-
 	}
 }
 

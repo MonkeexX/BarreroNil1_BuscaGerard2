@@ -16,7 +16,7 @@ void main()
 	srand(time(NULL));
 	char mapa[MAPSIZE][MAPSIZE];
 	char* pMapa = &mapa[MAPSIZE][MAPSIZE];
-	int X = 10, Y = 10; // POsition of player
+	int X, Y;
 	int limitScreen = 10;
 	int* Xpointer = &X;
 	int* Ypointer = &Y;
@@ -58,11 +58,11 @@ void main()
 		
 	}
 
-	for (int i = X-5; i < X+5; i++)
+	for (int i = 0; i < MAPSIZE; i++)
 	{
 		counterI++;
 		counterJ = 0;
-		for (int j = X-5; j < X+5; j++)
+		for (int j = 0; j < MAPSIZE; j++)
 		{
 			counterJ++;
 			if (i == MAPSIZE / 2)

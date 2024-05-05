@@ -14,9 +14,9 @@
 void main()
 {
 	srand(time(NULL));
-	char mapa[MAPSIZE+5][MAPSIZE+5];
+	char mapa[MAPSIZE + 5][MAPSIZE + 5];
 	char* pMapa = &mapa[MAPSIZE][MAPSIZE];
-	int X = 8, Y =13; // POsition of player, the map position is 6
+	int X = 16, Y = 9; // Min position of player is 5, 5
 	int limitScreen = 10;
 	int* Xpointer = &X;
 	int* Ypointer = &Y;
@@ -24,9 +24,26 @@ void main()
 	int input = 0;
 	int counterI = 0;
 	int counterJ = 0;
-	
 
-	
+	//function to prevent player to go outside the map
+	if (X < 5)
+	{
+		X = 6;
+	}
+	if (X > MAPSIZE)
+	{
+		X = MAPSIZE;
+	}
+	if (Y < 5)
+	{
+		Y = 6;
+	}
+	else if (Y > MAPSIZE)
+	{
+		Y = MAPSIZE;
+	}
+
+
 	for (int i = 0; i < MAPSIZE; i++)
 	{
 		for (int j = 0; j < MAPSIZE; j++)
@@ -47,22 +64,22 @@ void main()
 	//TODO: print the pokemons
 	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
 	{
-		int posX = 5+rand() % MAPSIZE;
-		int posY = 5+rand() % MAPSIZE;
+		int posX = 5 + rand() % MAPSIZE;
+		int posY = 5 + rand() % MAPSIZE;
 		if (mapa[posX][posY] != 'X' && mapa[posX][posY] != 'P')
 		{
 			mapa[posX][posY] = 'P';
 			std::cout << "Poke in:" << posX << posY << "\n";
 		}
-		
-		
+
+
 	}
 
-	for (int i = Y-5; i < Y+5; i++)
+	for (int i = Y - 5; i < Y + 5; i++)
 	{
 		counterI++;
 		counterJ = 0;
-		for (int j = Y-5; j < Y+5; j++)
+		for (int j = X - 5; j < X + 5; j++)
 		{
 			counterJ++;
 			if (i == MAPSIZE / 2)
@@ -85,15 +102,16 @@ void main()
 				mapa[j][i] = ' ';
 			}
 			else if (mapa[j][i] == 'O')
-			{ }
+			{
+			}
 			std::cout << mapa[j][i];
 		}
 		std::cout << "\n";
 	}
 	//AddPokemonToMap(number, pMapa);
-	
 
-	
 
-	
+
+
+
 }

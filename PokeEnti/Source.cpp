@@ -21,6 +21,10 @@ void main()
 	int input = 0;
 	int counterI = 0;
 	int counterJ = 0;
+	int caracterPosition;
+	int caracterX = 5;
+	int caracterY = 5;
+	char caracter = '>';
 	
 
 	//TODO: print the pokemons
@@ -33,26 +37,31 @@ void main()
 			mapa[posX][posY] = 'P';
 		}
 	}
-	PrintMap(mapa);
+	caracterPosition = mapa[caracterX][caracterY];
+	PrintMap(mapa, caracterPosition, caracter);
 	//AddPokemonToMap(number, pMapa);
 	
     int CharacterMovement(int input);
 	switch (input)
 	{
 	case 1:
-		//caracter move Up
+		caracterY--;
+		caracter = '^';
 	break;
 
 	case 2:
-		//caracter move Down
+		caracterY++;
+		caracter = 'v';
 	break;
 
 	case 3:
-		//caracter move Right
+		caracterX++;
+		caracter = '>';
 		break;
 
 	case 4:
-		//caracter move Left
+		caracterX--;
+		caracter = '<';
 		break;
 
 	case 5:

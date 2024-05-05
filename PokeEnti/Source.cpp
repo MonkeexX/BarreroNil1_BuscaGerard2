@@ -58,11 +58,11 @@ void main()
 		
 	}
 
-	for (int i = 0; i < MAPSIZE; i++)
+	for (int i = X-5; i < X+5; i++)
 	{
 		counterI++;
 		counterJ = 0;
-		for (int j = 0; j < MAPSIZE; j++)
+		for (int j = Y-5; j < Y+5; j++)
 		{
 			counterJ++;
 			if (i == MAPSIZE / 2)

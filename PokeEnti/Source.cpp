@@ -23,9 +23,6 @@ void main()
 	int counterJ = 0;
 	
 
-
-
-
 	//TODO: print the pokemons
 	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
 	{
@@ -39,7 +36,29 @@ void main()
 	PrintMap(mapa);
 	//AddPokemonToMap(number, pMapa);
 	
+    int CharacterMovement(int input);
+	switch (input)
+	{
+	case 1:
+		//caracter move Up
+	break;
 
+	case 2:
+		//caracter move Down
+	break;
+
+	case 3:
+		//caracter move Right
+		break;
+
+	case 4:
+		//caracter move Left
+		break;
+
+	case 5:
+		int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAPSIZE]);
+		break;
+	}
 	
 
 	

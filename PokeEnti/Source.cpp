@@ -62,7 +62,7 @@ void main()
 	{
 		counterI++;
 		counterJ = 0;
-		for (int j = X-5; j < X+5; j++)
+		for (int j = Y-5; j < Y+5; j++)
 		{
 			counterJ++;
 			if (i == MAPSIZE / 2)

@@ -147,7 +147,12 @@ int CharacterMovement(int input)
 	//falta el exit
 }
 
-void PrintMap(char map[MAPSIZE][MAPSIZE])
+void PrintCaracter(int caracter, char c)
+{
+	std::cout << c, caracter;
+}
+
+void PrintMap(char map[MAPSIZE][MAPSIZE], int caracter, char c)
 {
 	int counterI = 0;
 	int counterJ = 0;
@@ -178,9 +183,15 @@ void PrintMap(char map[MAPSIZE][MAPSIZE])
 				map[j][i] = ' ';
 			}
 			std::cout << map[j][i];
+
+			if (map[j][i] == caracter)
+			{
+			    PrintCaracter(caracter, c);
+			}
 		}
 		std::cout << "\n";
 	}
+    
 }
 
 

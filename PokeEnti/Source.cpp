@@ -26,6 +26,10 @@ void main()
 	int input = 0;
 	int counterI = 0;
 	int counterJ = 0;
+	int caracterPosition;
+	int caracterX = 5;
+	int caracterY = 5;
+	char caracter = '>';
 	int town = 10;
 	int forest = 0;
 	int cave = 0;
@@ -127,10 +131,12 @@ void main()
 			mapa[posX][posY] = 'P';
 			std::cout << "Poke in:" << posX << posY << "\n";
 		}
-		std::cout << "Number of Pokémon captured: " << captured;
+		std::cout << "Number of Pokï¿½mon captured: " << captured;
 
 
 	}
+	caracterPosition = mapa[caracterX][caracterY];
+	PrintMap(mapa, caracterPosition, caracter);
 
 	for (int i = Y - 5; i < Y + 5; i++)
 	{
@@ -166,7 +172,35 @@ void main()
 		std::cout << "\n";
 	}
 	//AddPokemonToMap(number, pMapa);
+	
+    int CharacterMovement(int input);
+	switch (input)
+	{
+	case 1:
+		caracterY--;
+		caracter = '^';
+	break;
 
+	case 2:
+		caracterY++;
+		caracter = 'v';
+	break;
+
+	case 3:
+		caracterX++;
+		caracter = '>';
+		break;
+
+	case 4:
+		caracterX--;
+		caracter = '<';
+		break;
+
+	case 5:
+		int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAPSIZE]);
+		break;
+	}
+	
 
 
 

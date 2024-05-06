@@ -25,7 +25,22 @@ void main()
 	int caracterX = 5;
 	int caracterY = 5;
 	char caracter = '>';
+
+	int captured = 0;
 	
+	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
+	{
+		int posX = 5 + rand() % MAPSIZE;
+		int posY = 5 + rand() % MAPSIZE;
+		if (mapa[posX][posY] != 'X' && mapa[posX][posY] != 'P')
+		{
+			mapa[posX][posY] = 'P';
+			std::cout << "Poke in:" << posX << posY << "\n";
+		}
+		std::cout << "Number of Pokemon captured: " << captured;
+
+
+	}
 
 	//TODO: print the pokemons
 	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
@@ -41,7 +56,7 @@ void main()
 	PrintMap(mapa, caracterPosition, caracter);
 	//AddPokemonToMap(number, pMapa);
 	
-    int CharacterMovement(int input);
+    CharacterMovement(input);
 	switch (input)
 	{
 	case 1:
@@ -65,7 +80,7 @@ void main()
 		break;
 
 	case 5:
-		int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAPSIZE]);
+		//CapturingPokemon(posX, posY, capturedPoke, map[MAPSIZE][MAPSIZE]);
 		break;
 	}
 	

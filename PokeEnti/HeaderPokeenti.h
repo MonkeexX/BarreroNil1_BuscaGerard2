@@ -3,7 +3,7 @@
 #include<iostream>
 #include <windows.h>
 const int MAP_SIZE = 20;
-const int MAX_POKEMON = 200;
+const int MAX_POKEMON = 10;
 
 //void mapCopy(char map[MAPSIZE][MAPSIZE])
 //{
@@ -46,7 +46,7 @@ void AddPokemonToMap(int num, char map)
 	}
 }
 
-int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAP_SIZE][MAP_SIZE])
+int CapturingPokemon(int posX, int posY, int capturedPoke, char **map)
 {
 	bool isTherePokemon = false;
 
@@ -101,8 +101,6 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAP_SIZE][MA
 		y = posY++;
 		isTherePokemon = true;
 	}
-
-
 
 	if (isTherePokemon)
 	{
@@ -177,12 +175,15 @@ void PrintMap(char** map, int caracter, char c)
 			{
 				map[j][i] = ' ';
 			}
-			std::cout << map[j][i];
 
 			if (map[j][i] == caracter)
 			{
 				PrintCaracter(caracter, c);
 			}
+
+			std::cout << map[j][i];
+
+			
 		}
 		std::cout << "\n";
 	}
@@ -193,8 +194,8 @@ void PrintPoke(char** mapa, int captured)
 {
 	for (int pokemonGenerated = 0; pokemonGenerated < MAX_POKEMON; pokemonGenerated++)
 	{
-		int posX = 5 + rand() % MAP_SIZE;
-		int posY = 5 + rand() % MAP_SIZE;
+		int posX = rand() % MAP_SIZE;
+		int posY = rand() % MAP_SIZE;
 		if (mapa[posX][posY] != 'X' && mapa[posX][posY] != 'P')
 		{
 			mapa[posX][posY] = 'P';

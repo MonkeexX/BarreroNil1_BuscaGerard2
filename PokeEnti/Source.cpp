@@ -5,13 +5,15 @@
 #include <fstream>
 #include "HeaderPokeenti.h"
 
-const int MAP_SIZE = 20;
-const int MAX_POKEMON = 100;
-
 void main()
 {
 	srand(time(NULL));
-	char** mapa = new char* [MAP_SIZE + 10];
+	char** mapa;
+	mapa = new char* [MAP_SIZE]; 
+	for (int i = 0; i < MAP_SIZE; i++)
+	{
+		mapa[i] = new char[MAP_SIZE];
+	}
 
 	int X = 7, Y = 7; // Min position of player is 5, 5
 	int limitScreen = 11;
@@ -32,7 +34,7 @@ void main()
 	//To know the number of pokemon captured
 	int captured = 0;
 
-
+	bool gameLoop = true;
 
 	//Read from files
 	std::ifstream config;
@@ -69,6 +71,10 @@ void main()
 		}
 	}
 
+	
+
+
+
 
 	//Read from files
 	//ifstream config;
@@ -82,10 +88,6 @@ void main()
 
 		//std::cout << town << " " << forest << " " << cave <<"\n";
 	//}
-
-
-
-
 
 	//function to prevent player to go outside the map
 	if (X < 5)
@@ -134,50 +136,60 @@ void main()
 
 	}
 
-
-
 	// print the pokemons
 	PrintPoke(mapa, captured);
-	caracterPosition = mapa[caracterX][caracterY];
 
-	PrintMap(mapa, caracterPosition, caracter);
-
-	//AddPokemonToMap(number, pMapa);
-
-	//OJO LAS FUNCIONES NO ESTAN BIEN PUESTAS
-
-	switch (input)
+	while (gameLoop = true)
 	{
-	case 1:
-		caracterY--;
-		caracter = '^';
-		break;
 
-	case 2:
-		caracterY++;
-		caracter = 'v';
-		break;
+		caracterPosition = mapa[caracterX][caracterY];
 
-	case 3:
-		caracterX++;
-		caracter = '>';
-		break;
+		PrintMap(mapa, caracterPosition, caracter);
 
-	case 4:
-		caracterX--;
-		caracter = '<';
-		break;
+		//AddPokemonToMap(number, pMapa);
 
-	case 5:
-		//CapturingPokemon( , , ,mapa);
-		break;
+		//OJO LAS FUNCIONES NO ESTAN BIEN PUESTAS
+
+		switch (CharacterMovement(input))
+		{
+		case 1:
+			caracterY--;
+			caracter = '^';
+			break;
+
+		case 2:
+			caracterY++;
+			caracter = 'v';
+			break;
+
+		case 3:
+			caracterX++;
+			caracter = '>';
+			break;
+
+		case 4:
+			caracterX--;
+			caracter = '<';
+			break;
+
+		case 5:
+			CapturingPokemon(caracterX,caracterY,captured,mapa);
+			break;
+
+		case 6:
+			gameLoop = false;
+			break;
+		}
+
+		for (int i = 0; i <= MAP_SIZE + 5; i++)
+		{
+			//delete() mapa;
+		}
+		system("cls");
+		Sleep(100);
+		if (captured >= league)
+		{
+			gameLoop = false;
+		}
 	}
-
-
-
-	for (int i = 0; i <= MAP_SIZE + 5; i++)
-	{
-		//delete() mapa;
-	}
-
 }

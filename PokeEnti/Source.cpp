@@ -173,7 +173,7 @@ void main()
 	}
 	//AddPokemonToMap(number, pMapa);
 	
-    int CharacterMovement(int input);
+    CharacterMovement(input);
 	switch (input)
 	{
 	case 1:
@@ -197,7 +197,7 @@ void main()
 		break;
 
 	case 5:
-		int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAPSIZE]);
+	    CapturingPokemon(posX, posY, capturedPoke, map[MAPSIZE][MAPSIZE]);
 		break;
 	}
 	

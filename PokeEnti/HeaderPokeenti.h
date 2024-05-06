@@ -1,18 +1,9 @@
 #pragma once
 #pragma once
 #include<iostream>
-#include <conio.h>
-#define MAPSIZE 20
-#define MAXPOKEMON 200
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_RIGHT 77
-#define KEY_LEFT 75
-#define KEY_SPACE 32
-
-int pokeCapture;
-char map[MAPSIZE][MAPSIZE];
-char* mapSice;
+#include <windows.h>
+const int MAP_SIZE = 20;
+const int MAX_POKEMON = 200;
 
 //void mapCopy(char map[MAPSIZE][MAPSIZE])
 //{
@@ -25,17 +16,17 @@ char* mapSice;
 //}
 //}
 
-void MapInitiation(char* map [MAPSIZE][MAPSIZE])
+void MapInitiation(char* map[MAP_SIZE][MAP_SIZE])
 {
 
 
 
 	//Now we are going to dive in four zones las paredes se representan con (X)
 
-	for (int i = 0; i < MAPSIZE; i++)
+	for (int i = 0; i < MAP_SIZE; i++)
 	{
-		*map[i][MAPSIZE / 2] = 'X';
-		*map[MAPSIZE / 2][i] = 'X';
+		*map[i][MAP_SIZE / 2] = 'X';
+		*map[MAP_SIZE / 2][i] = 'X';
 
 		//return map;
 	}
@@ -44,10 +35,10 @@ void MapInitiation(char* map [MAPSIZE][MAPSIZE])
 void AddPokemonToMap(int num, char map)
 {
 	//P represents a pokemon in a position
-	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
+	for (int pokemonGenerated = 0; pokemonGenerated < MAX_POKEMON; pokemonGenerated++)
 	{
-		int posX = rand() % MAPSIZE;
-		int posY = rand() % MAPSIZE;
+		int posX = rand() % MAP_SIZE;
+		int posY = rand() % MAP_SIZE;
 		//if (map[posX][posY] != 'X' && map[posX][posY] != 'P')
 		{
 			//map[posX][posY] = 'P';
@@ -55,7 +46,7 @@ void AddPokemonToMap(int num, char map)
 	}
 }
 
-int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAPSIZE])
+int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAP_SIZE][MAP_SIZE])
 {
 	bool isTherePokemon = false;
 
@@ -123,25 +114,29 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAP
 
 int CharacterMovement(int input)
 {
-	if (input == KEY_UP)
+	if (input == VK_UP)
 	{
 		return 1;
 	}
-	else if (input == KEY_DOWN)
+	else if (input == VK_DOWN)
 	{
 		return 2;
 	}
-	else if (input == KEY_RIGHT)
+	else if (input == VK_LEFT)
 	{
 		return 3;
 	}
-	else if (input == KEY_LEFT)
+	else if (input == VK_RIGHT)
 	{
 		return 4;
 	}
-	else if (input == KEY_SPACE)
+	else if (input == VK_SPACE)
 	{
 		return 5;
+	}
+	else if (input == VK_ESCAPE)
+	{
+		return 6;
 	}
 
 	//falta el exit
@@ -152,24 +147,28 @@ void PrintCaracter(int caracter, char c)
 	std::cout << c, caracter;
 }
 
-void PrintMap(char map[MAPSIZE][MAPSIZE], int caracter, char c)
+void PrintMap(char** map, int caracter, char c)
 {
 	int counterI = 0;
 	int counterJ = 0;
-	for (int i = 0; i < MAPSIZE; i++)
+	for (int i = 0; i < MAP_SIZE; i++)
 	{
 		counterI++;
 		counterJ = 0;
-		for (int j = 0; j < MAPSIZE; j++)
+		for (int j = 0; j < MAP_SIZE; j++)
 		{
 			counterJ++;
-			if (i == MAPSIZE / 2)
+			if (i == MAP_SIZE / 2)
 			{
 				map[j][i] = 'X';
 				counterI = 0;
 
 			}
-			else if (j == MAPSIZE / 2)
+			else if (map[i][j] == 'P')
+			{
+				map[j][i] = 'P';
+			}
+			else if (j == MAP_SIZE / 2)
 			{
 				map[j][i] = 'X';
 				counterJ = 0;
@@ -182,15 +181,49 @@ void PrintMap(char map[MAPSIZE][MAPSIZE], int caracter, char c)
 
 			if (map[j][i] == caracter)
 			{
-			    PrintCaracter(caracter, c);
+				PrintCaracter(caracter, c);
 			}
 		}
 		std::cout << "\n";
-		//return map;
 	}
-    
+
 }
 
+void PrintPoke(char** mapa, int captured)
+{
+	for (int pokemonGenerated = 0; pokemonGenerated < MAX_POKEMON; pokemonGenerated++)
+	{
+		int posX = 5 + rand() % MAP_SIZE;
+		int posY = 5 + rand() % MAP_SIZE;
+		if (mapa[posX][posY] != 'X' && mapa[posX][posY] != 'P')
+		{
+			mapa[posX][posY] = 'P';
+			std::cout << "Poke in:" << posX << posY << "\n";
+		}
+		std::cout << "Number of Pokemon captured: " << captured;
+
+
+	}
+}
+void SettingMapBarrieres(char** mapa)
+{
+	for (int i = 0; i < MAP_SIZE; i++)
+	{
+		for (int j = 0; j < MAP_SIZE; j++)
+		{
+			if (i == MAP_SIZE / 2)
+			{
+				mapa[j][i] = 'X';
+			}
+
+			else if (j == MAP_SIZE / 2)
+			{
+				mapa[j][i] = 'X';
+			}
+		}
+		//return map;
+	}
+}
 
 //{
 
@@ -203,4 +236,3 @@ void PrintMap(char map[MAPSIZE][MAPSIZE], int caracter, char c)
 //}
 
 //}
-

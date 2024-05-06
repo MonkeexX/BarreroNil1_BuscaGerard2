@@ -1,20 +1,20 @@
 #include <iostream>
-#include <conio.h>
+#include <windows.h>
+#include <ctime>
+#include <string>
+#include <fstream>
 #include "HeaderPokeenti.h"
-#define MAPSIZE 20
-#define MAXPOKEMON 200
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_RIGHT 77
-#define KEY_LEFT 75
-#define KEY_SPACE 32
 
+const int MAP_SIZE = 20;
+const int MAX_POKEMON = 100;
 
 void main()
 {
-	char mapa[MAPSIZE][MAPSIZE];
-	char* pMapa = &mapa[MAPSIZE][MAPSIZE];
-	int X, Y;
+	srand(time(NULL));
+	char** mapa = new char* [MAP_SIZE + 10];
+
+	int X = 7, Y = 7; // Min position of player is 5, 5
+	int limitScreen = 11;
 	int* Xpointer = &X;
 	int* Ypointer = &Y;
 	int number = 10;
@@ -25,49 +25,138 @@ void main()
 	int caracterX = 5;
 	int caracterY = 5;
 	char caracter = '>';
-
+	int town = 5;
+	int forest = 20;
+	int cave = 30;
+	int league = 40;
+	//To know the number of pokemon captured
 	int captured = 0;
-	
-	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
-	{
-		int posX = 5 + rand() % MAPSIZE;
-		int posY = 5 + rand() % MAPSIZE;
-		if (mapa[posX][posY] != 'X' && mapa[posX][posY] != 'P')
-		{
-			mapa[posX][posY] = 'P';
-			std::cout << "Poke in:" << posX << posY << "\n";
-		}
-		std::cout << "Number of Pokemon captured: " << captured;
 
+
+
+	//Read from files
+	std::ifstream config;
+	config.open("config.txt", std::ios::in | std::ios::app);
+	if (config.is_open())
+	{
+
+		config >> town;
+		config >> forest;
+		config >> cave;
+
+		std::cout << town << " " << forest << " " << cave << "\n";
+	}
+
+	if (captured >= town)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			mapa[i][MAP_SIZE / 2] = ' ';
+		}
+	}
+	if (captured >= forest)
+	{
+		for (int i = MAP_SIZE / 2 + 1; i < MAP_SIZE + MAP_SIZE / 4; i++)
+		{
+			mapa[i][MAP_SIZE / 2] = ' ';
+		}
+	}
+	if (captured >= cave)
+	{
+		for (int i = MAP_SIZE / 2; i < MAP_SIZE + MAP_SIZE / 4; i++)
+		{
+			mapa[MAP_SIZE / 2][i] = ' ';
+		}
+	}
+
+
+	//Read from files
+	//ifstream config;
+	//config.open("config.txt", ios::in | ios::app);
+	//if (config.is_open())
+	//{
+
+		//config >> town;
+		//config >> forest;
+		//config >> cave;
+
+		//std::cout << town << " " << forest << " " << cave <<"\n";
+	//}
+
+
+
+
+
+	//function to prevent player to go outside the map
+	if (X < 5)
+	{
+		X = 6;
+	}
+	if (X > MAP_SIZE)
+	{
+		X = MAP_SIZE;
+	}
+	if (Y < 5)
+	{
+		Y = 6;
+	}
+	else if (Y > MAP_SIZE)
+	{
+		Y = MAP_SIZE;
+	}
+
+	SettingMapBarrieres(mapa);
+
+	//TODO: We have to make this work!
+	if (captured >= town)
+	{
+		for (int i = 0; i < MAP_SIZE / 4; i++)
+		{
+			mapa[MAP_SIZE / 2][i] = ' ';
+		}
+	}
+	if (captured >= forest)
+	{
+		for (int i = MAP_SIZE / 2; i < MAP_SIZE + MAP_SIZE / 4; i++)
+		{
+			mapa[i][MAP_SIZE / 2] = ' ';
+		}
+	}
+	if (captured >= cave)
+	{
+		for (int i = MAP_SIZE / 2; i < MAP_SIZE + MAP_SIZE / 4; i++)
+		{
+			mapa[MAP_SIZE / 2][i] = ' ';
+		}
+	}
+	if (captured >= league)
+	{
 
 	}
 
-	//TODO: print the pokemons
-	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
-	{
-		int posX = 1;
-		int posY = 1;
-		if (mapa[posX][posY] == ' ')
-		{
-			mapa[posX][posY] = 'P';
-		}
-	}
+
+
+	// print the pokemons
+	PrintPoke(mapa, captured);
 	caracterPosition = mapa[caracterX][caracterY];
+
 	PrintMap(mapa, caracterPosition, caracter);
+
 	//AddPokemonToMap(number, pMapa);
-	
-    CharacterMovement(input);
+
+	//OJO LAS FUNCIONES NO ESTAN BIEN PUESTAS
+
 	switch (input)
 	{
 	case 1:
 		caracterY--;
 		caracter = '^';
-	break;
+		break;
 
 	case 2:
 		caracterY++;
 		caracter = 'v';
-	break;
+		break;
 
 	case 3:
 		caracterX++;
@@ -80,10 +169,15 @@ void main()
 		break;
 
 	case 5:
-		//CapturingPokemon(posX, posY, capturedPoke, map[MAPSIZE][MAPSIZE]);
+		//CapturingPokemon( , , ,mapa);
 		break;
 	}
-	
 
-	
+
+
+	for (int i = 0; i <= MAP_SIZE + 5; i++)
+	{
+		//delete() mapa;
+	}
+
 }

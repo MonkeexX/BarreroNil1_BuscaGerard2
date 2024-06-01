@@ -69,19 +69,20 @@ void AddPokemonToMap(int num, char map, char* maping [MAPSIZE][MAPSIZE])
 void PrintMap(int** map, int  mapY, int mapX)
 {
 
-	for (int j = 0; j < mapY; ++j)
+	for (int i = 0; i < mapX; ++i)
 	{
-		for (int i = 0; i < mapX; ++i)
+		for (int j = 0; j < mapY; ++j)
 		{
-			if (map[j][i] == 0)
-			{
-				std::cout << " ";
-			}
-			else if (map[j][i] = 1)
+			if (i == mapX/2 || j == mapY/2)
 			{
 				std::cout << "X";
 			}
+			else
+			{
+				std::cout << " ";
+			}
 		}
+		std::cout << "\n";
 	}
 }
 
@@ -183,7 +184,7 @@ void PrintCaracter(int caracter, char c)
 	std::cout << c, caracter;
 }
 
-void PrintMap(char map[MAPSIZE][MAPSIZE], int caracter, char c)
+void PrintMapold(char map[MAPSIZE][MAPSIZE], int caracter, char c)
 {
 	int counterI = 0;
 	int counterJ = 0;
@@ -208,8 +209,12 @@ void PrintMap(char map[MAPSIZE][MAPSIZE], int caracter, char c)
 			}
 
 		}
+		std::cout <<  "\n";
 	}
     
+
+	
+
 }
 
 

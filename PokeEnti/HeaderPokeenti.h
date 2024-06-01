@@ -1,18 +1,17 @@
 #pragma once
-#pragma once
 #include<iostream>
 #include <conio.h>
+#include <fstream>
 #define MAPSIZE 20
-#define MAXPOKEMON 200
+#define MAXPOKE 200
+#include "HeaderPokeenti.h"
+#include <fstream>
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_RIGHT 77
 #define KEY_LEFT 75
 #define KEY_SPACE 32
 
-int pokeCapture;
-char map[MAPSIZE][MAPSIZE];
-char* mapSice;
 
 //void mapCopy(char map[MAPSIZE][MAPSIZE])
 //{
@@ -25,35 +24,67 @@ char* mapSice;
 //}
 //}
 
-void MapInitiation(char* map [MAPSIZE][MAPSIZE])
+void MapInitiation(int** map, int  mapY, int mapX)
 {
-
-
-
-	//Now we are going to dive in four zones las paredes se representan con (X)
-
-	for (int i = 0; i < MAPSIZE; i++)
+	//Firts we create a map in blank
+	for (int i = 0; i < mapX; ++i)
 	{
-		*map[i][MAPSIZE / 2] = 'X';
-		*map[MAPSIZE / 2][i] = 'X';
-
-		//return map;
+		for (int j = 0; j < mapY; ++j)
+		{
+			if (i == mapX / 2)
+			{
+				map[i][j] = 1;
+			}
+			if (j == mapY / 2)
+			{
+				map[i][j] = 1;
+			}
+			else
+			{
+				map[i][j] = 0;
+			}
+		}
 	}
+
+	//Then we will create a map with the walls
+
+
+
 }
 
-void AddPokemonToMap(int num, char map)
+void AddPokemonToMap(int num, char map, char* maping [MAPSIZE][MAPSIZE])
 {
-	//P represents a pokemon in a position
-	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKEMON; pokemonGenerated++)
+	//Pokemon = 1
+	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE; pokemonGenerated++)
 	{
 		int posX = rand() % MAPSIZE;
 		int posY = rand() % MAPSIZE;
-		//if (map[posX][posY] != 'X' && map[posX][posY] != 'P')
+		if (*maping[posX][posY] != 0 && *maping[posX][posY] != 1)
 		{
-			//map[posX][posY] = 'P';
+			*maping[posX][posY] = 2;
 		}
 	}
 }
+
+void PrintMap(int** map, int  mapY, int mapX)
+{
+
+	for (int j = 0; j < mapY; ++j)
+	{
+		for (int i = 0; i < mapX; ++i)
+		{
+			if (map[j][i] == 0)
+			{
+				std::cout << " ";
+			}
+			else if (map[j][i] = 1)
+			{
+				std::cout << "X";
+			}
+		}
+	}
+}
+
 
 int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAPSIZE])
 {
@@ -62,49 +93,49 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAP
 	//we will check every square next to the player
 	int x;
 	int y;
-	if (map[posX][posY++] == 'P')
+	if (map[posX][posY++] == 1)
 	{
 		x = posX;
 		y = posY++;
 		isTherePokemon = true;
 	}
-	else if (map[posX++][posY++] == 'P')
+	else if (map[posX++][posY++] == 1)
 	{
 		x = posX++;
 		y = posY++;
 		isTherePokemon = true;
 	}
-	if (map[posX++][posY] == 'P')
+	if (map[posX++][posY] == 1)
 	{
 		x = posX++;
 		y = posY;
 		isTherePokemon = true;
 	}
-	if (map[posX++][posY--] == 'P')
+	if (map[posX++][posY--] == 1)
 	{
 		x = posX++;
 		y = posY--;
 		isTherePokemon = true;
 	}
-	if (map[posX][posY--] == 'P')
+	if (map[posX][posY--] == 1)
 	{
 		x = posX;
 		y = posY--;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY--] == 'P')
+	if (map[posX--][posY--] == 1)
 	{
 		x = posX--;
 		y = posY--;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY] == 'P')
+	if (map[posX--][posY] == 1)
 	{
 		x = posX--;
 		y = posY;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY++] == 'P')
+	if (map[posX--][posY++] == 1)
 	{
 		x = posX--;
 		y = posY++;
@@ -163,33 +194,20 @@ void PrintMap(char map[MAPSIZE][MAPSIZE], int caracter, char c)
 		for (int j = 0; j < MAPSIZE; j++)
 		{
 			counterJ++;
-			if (i == MAPSIZE / 2)
+			if (map[counterI][counterJ] == 1)
 			{
-				map[j][i] = 'X';
-				counterI = 0;
-
+				std::cout << "X";
 			}
-			else if (map[i][j] == 'P')
+			else if (map[counterI][counterJ] == 2)
 			{
-				map[j][i] = 'P';
-			}
-			else if (j == MAPSIZE / 2)
-			{
-				map[j][i] = 'X';
-				counterJ = 0;
+				std::cout << "P";
 			}
 			else
 			{
-				map[j][i] = ' ';
+				std::cout << " ";
 			}
-			std::cout << map[j][i];
 
-			if (map[j][i] == caracter)
-			{
-			    PrintCaracter(caracter, c);
-			}
 		}
-		std::cout << "\n";
 	}
     
 }

@@ -50,8 +50,6 @@ int main()
 		config >> town;
 		config >> forest;
 		config >> cave;
-
-		std::cout << mapX << " " << mapY << " " << town << " " << forest << " " << cave << "\n";
 	}
 	int** mapa = new int*[mapX];
 	for (int i = 0; i < mapX; ++i)
@@ -60,5 +58,6 @@ int main()
 	}
 
 	MapInitiation(mapa, mapY, mapX);
+	AddPokemonToMap(mapa, mapY, mapX);
 	PrintMap(mapa, mapY, mapX);
 }

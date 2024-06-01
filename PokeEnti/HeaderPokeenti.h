@@ -52,16 +52,16 @@ void MapInitiation(int** map, int  mapY, int mapX)
 
 }
 
-void AddPokemonToMap(int num, char map, char* maping [MAPSIZE][MAPSIZE])
+void AddPokemonToMap(int** map, int  mapY, int mapX)
 {
-	//Pokemon = 1
+	//Pokemon = 2
 	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE; pokemonGenerated++)
 	{
-		int posX = rand() % MAPSIZE;
-		int posY = rand() % MAPSIZE;
-		if (*maping[posX][posY] != 0 && *maping[posX][posY] != 1)
+		int posX = rand() % mapX;
+		int posY = rand() % mapY;
+		if (map[posX][posY] != 1 && map[posX][posY] != 2)
 		{
-			*maping[posX][posY] = 2;
+			map[posX][posY] = 2;
 		}
 	}
 }
@@ -77,6 +77,10 @@ void PrintMap(int** map, int  mapY, int mapX)
 			{
 				std::cout << "X";
 			}
+			else if (map[i][j] == 2)
+			{
+				std::cout << "P";
+			}
 			else
 			{
 				std::cout << " ";
@@ -87,7 +91,7 @@ void PrintMap(int** map, int  mapY, int mapX)
 }
 
 
-int CapturingPokemon(int posX, int posY, int capturedPoke, char map[MAPSIZE][MAPSIZE])
+int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 {
 	bool isTherePokemon = false;
 
@@ -157,76 +161,30 @@ int CharacterMovement(int input)
 {
 	if (input == KEY_UP)
 	{
-		return 1;
+		return 5;
 	}
 	else if (input == KEY_DOWN)
 	{
-		return 2;
+		return 6;
 	}
 	else if (input == KEY_RIGHT)
 	{
-		return 3;
+		return 7;
 	}
 	else if (input == KEY_LEFT)
 	{
-		return 4;
+		return 8;
 	}
 	else if (input == KEY_SPACE)
 	{
-		return 5;
+		return 9;
 	}
 
-	//falta el exit
+
 }
 
 void PrintCaracter(int caracter, char c)
 {
 	std::cout << c, caracter;
 }
-
-void PrintMapold(char map[MAPSIZE][MAPSIZE], int caracter, char c)
-{
-	int counterI = 0;
-	int counterJ = 0;
-	for (int i = 0; i < MAPSIZE; i++)
-	{
-		counterI++;
-		counterJ = 0;
-		for (int j = 0; j < MAPSIZE; j++)
-		{
-			counterJ++;
-			if (map[counterI][counterJ] == 1)
-			{
-				std::cout << "X";
-			}
-			else if (map[counterI][counterJ] == 2)
-			{
-				std::cout << "P";
-			}
-			else
-			{
-				std::cout << " ";
-			}
-
-		}
-		std::cout <<  "\n";
-	}
-    
-
-	
-
-}
-
-
-//{
-
-//for (int i = 0; i <= MAPSIZE; i++)
-//{
-//for (int j = 0; j <= MAPSIZE; j++)
-//{
-
-//}
-//}
-
-//}
 

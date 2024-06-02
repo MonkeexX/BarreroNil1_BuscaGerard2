@@ -29,8 +29,10 @@ int main()
 	int counterI = 0;
 	int counterJ = 0;
 	int caracterPosition = 0;
-	int caracterX = 5;
-	int caracterY = 5;
+	int caracterX = 20;
+	int caracterY = 20;
+	int caracterXMin = caracterX - 20;
+	int caracterYMin = caracterY - 20;
 	char caracter = '>';
 	int league = 6;
 	int town = 4;
@@ -51,7 +53,7 @@ int main()
 		config >> forest;
 		config >> cave;
 	}
-	int** mapa = new int*[mapX];
+	int** mapa = new int* [mapX + 40];
 	for (int i = 0; i < mapX; ++i)
 	{
 		mapa[i] = new int[mapY];
@@ -59,5 +61,5 @@ int main()
 
 	MapInitiation(mapa, mapY, mapX);
 	AddPokemonToMap(mapa, mapY, mapX);
-	PrintMap(mapa, mapY, mapX);
+	PrintMap(mapa, mapY, mapX, caracterX, caracterY, caracterXMin, caracterYMin);
 }

@@ -1,9 +1,17 @@
 #pragma once
-#pragma once
 #include<iostream>
-#include <windows.h>
-const int MAP_SIZE = 20;
-const int MAX_POKEMON = 10;
+#include <conio.h>
+#include <fstream>
+#define MAPSIZE 20
+#define MAXPOKE 200
+#include "HeaderPokeenti.h"
+#include <fstream>
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_RIGHT 77
+#define KEY_LEFT 75
+#define KEY_SPACE 32
+
 
 //void mapCopy(char map[MAPSIZE][MAPSIZE])
 //{
@@ -16,91 +24,130 @@ const int MAX_POKEMON = 10;
 //}
 //}
 
-void MapInitiation(char* map[MAP_SIZE][MAP_SIZE])
+void MapInitiation(int** map, int  mapY, int mapX)
 {
-
-
-
-	//Now we are going to dive in four zones las paredes se representan con (X)
-
-	for (int i = 0; i < MAP_SIZE; i++)
+	//Firts we create a map in blank
+	for (int i = 0; i < mapX; ++i)
 	{
-		*map[i][MAP_SIZE / 2] = 'X';
-		*map[MAP_SIZE / 2][i] = 'X';
-
-		//return map;
+		for (int j = 0; j < mapY; ++j)
+		{
+			if (i == mapX / 2)
+			{
+				map[i][j] = 1;
+			}
+			if (j == mapY / 2)
+			{
+				map[i][j] = 1;
+			}
+			else
+			{
+				map[i][j] = 0;
+			}
+		}
 	}
+
+	//Then we will create a map with the walls
+
+
+
 }
 
-void AddPokemonToMap(int num, char map)
+void AddPokemonToMap(int** map, int  mapY, int mapX)
 {
-	//P represents a pokemon in a position
-	for (int pokemonGenerated = 0; pokemonGenerated < MAX_POKEMON; pokemonGenerated++)
+	//Pokemon = 2
+	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE; pokemonGenerated++)
 	{
-		int posX = rand() % MAP_SIZE;
-		int posY = rand() % MAP_SIZE;
-		//if (map[posX][posY] != 'X' && map[posX][posY] != 'P')
+		int posX = rand() % mapX;
+		int posY = rand() % mapY;
+		if (map[posX][posY] != 1 && map[posX][posY] != 2)
 		{
-			//map[posX][posY] = 'P';
+			map[posX][posY] = 2;
 		}
 	}
 }
 
-int CapturingPokemon(int posX, int posY, int capturedPoke, char **map)
+void PrintMap(int** map, int  mapY, int mapX)
+{
+
+	for (int i = 0; i < mapX; ++i)
+	{
+		for (int j = 0; j < mapY; ++j)
+		{
+			if (i == mapX/2 || j == mapY/2)
+			{
+				std::cout << "X";
+			}
+			else if (map[i][j] == 2)
+			{
+				std::cout << "P";
+			}
+			else
+			{
+				std::cout << " ";
+			}
+		}
+		std::cout << "\n";
+	}
+}
+
+
+int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 {
 	bool isTherePokemon = false;
 
 	//we will check every square next to the player
 	int x;
 	int y;
-	if (map[posX][posY++] == 'P')
+	if (map[posX][posY++] == 1)
 	{
 		x = posX;
 		y = posY++;
 		isTherePokemon = true;
 	}
-	else if (map[posX++][posY++] == 'P')
+	else if (map[posX++][posY++] == 1)
 	{
 		x = posX++;
 		y = posY++;
 		isTherePokemon = true;
 	}
-	if (map[posX++][posY] == 'P')
+	if (map[posX++][posY] == 1)
 	{
 		x = posX++;
 		y = posY;
 		isTherePokemon = true;
 	}
-	if (map[posX++][posY--] == 'P')
+	if (map[posX++][posY--] == 1)
 	{
 		x = posX++;
 		y = posY--;
 		isTherePokemon = true;
 	}
-	if (map[posX][posY--] == 'P')
+	if (map[posX][posY--] == 1)
 	{
 		x = posX;
 		y = posY--;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY--] == 'P')
+	if (map[posX--][posY--] == 1)
 	{
 		x = posX--;
 		y = posY--;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY] == 'P')
+	if (map[posX--][posY] == 1)
 	{
 		x = posX--;
 		y = posY;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY++] == 'P')
+	if (map[posX--][posY++] == 1)
 	{
 		x = posX--;
 		y = posY++;
 		isTherePokemon = true;
 	}
+
+
 
 	if (isTherePokemon)
 	{
@@ -112,32 +159,28 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, char **map)
 
 int CharacterMovement(int input)
 {
-	if (input == VK_UP)
-	{
-		return 1;
-	}
-	else if (input == VK_DOWN)
-	{
-		return 2;
-	}
-	else if (input == VK_LEFT)
-	{
-		return 3;
-	}
-	else if (input == VK_RIGHT)
-	{
-		return 4;
-	}
-	else if (input == VK_SPACE)
+	if (input == KEY_UP)
 	{
 		return 5;
 	}
-	else if (input == VK_ESCAPE)
+	else if (input == KEY_DOWN)
 	{
 		return 6;
 	}
+	else if (input == KEY_RIGHT)
+	{
+		return 7;
+	}
+	else if (input == KEY_LEFT)
+	{
+		return 8;
+	}
+	else if (input == KEY_SPACE)
+	{
+		return 9;
+	}
 
-	//falta el exit
+
 }
 
 void PrintCaracter(int caracter, char c)
@@ -145,95 +188,3 @@ void PrintCaracter(int caracter, char c)
 	std::cout << c, caracter;
 }
 
-void PrintMap(char** map, int caracter, char c)
-{
-	int counterI = 0;
-	int counterJ = 0;
-	for (int i = 0; i < MAP_SIZE; i++)
-	{
-		counterI++;
-		counterJ = 0;
-		for (int j = 0; j < MAP_SIZE; j++)
-		{
-			counterJ++;
-			if (i == MAP_SIZE / 2)
-			{
-				map[j][i] = 'X';
-				counterI = 0;
-
-			}
-			else if (map[i][j] == 'P')
-			{
-				map[j][i] = 'P';
-			}
-			else if (j == MAP_SIZE / 2)
-			{
-				map[j][i] = 'X';
-				counterJ = 0;
-			}
-			else
-			{
-				map[j][i] = ' ';
-			}
-
-			if (map[j][i] == caracter)
-			{
-				PrintCaracter(caracter, c);
-			}
-
-			std::cout << map[j][i];
-
-			
-		}
-		std::cout << "\n";
-	}
-
-}
-
-void PrintPoke(char** mapa, int captured)
-{
-	for (int pokemonGenerated = 0; pokemonGenerated < MAX_POKEMON; pokemonGenerated++)
-	{
-		int posX = rand() % MAP_SIZE;
-		int posY = rand() % MAP_SIZE;
-		if (mapa[posX][posY] != 'X' && mapa[posX][posY] != 'P')
-		{
-			mapa[posX][posY] = 'P';
-			std::cout << "Poke in:" << posX << posY << "\n";
-		}
-		std::cout << "Number of Pokemon captured: " << captured;
-
-
-	}
-}
-void SettingMapBarrieres(char** mapa)
-{
-	for (int i = 0; i < MAP_SIZE; i++)
-	{
-		for (int j = 0; j < MAP_SIZE; j++)
-		{
-			if (i == MAP_SIZE / 2)
-			{
-				mapa[j][i] = 'X';
-			}
-
-			else if (j == MAP_SIZE / 2)
-			{
-				mapa[j][i] = 'X';
-			}
-		}
-		//return map;
-	}
-}
-
-//{
-
-//for (int i = 0; i <= MAPSIZE; i++)
-//{
-//for (int j = 0; j <= MAPSIZE; j++)
-//{
-
-//}
-//}
-
-//}

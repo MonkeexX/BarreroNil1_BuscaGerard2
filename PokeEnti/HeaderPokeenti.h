@@ -33,7 +33,15 @@ void MapInitiation(int** map, int  mapY, int mapX)
 			}
 		}
 	}
-	map[0][0] = 6;
+	map[0][0] =6;
+}
+
+void UnlockZones(int captured, int paleta, int forest, int cave, int** map)
+{
+	if (captured >= paleta)
+	{
+
+	}
 }
 
 void AddPokemonToMap(int** map, int  mapY, int mapX)

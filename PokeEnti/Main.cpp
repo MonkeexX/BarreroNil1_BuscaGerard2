@@ -24,7 +24,7 @@ int main()
 	int X = 10, Y = 10; // Min position of player is 5, 5
 
 	int input = 0;
-	std::cin >> input;
+	int move;
 	int counterI = 0;
 	int counterJ = 0;
 	int caracterPosition = 0;
@@ -60,14 +60,35 @@ int main()
 	MapInitiation(mapa, mapY, mapX);
 	AddPokemonToMap(mapa, mapY, mapX);
 	PrintMap(mapa, mapY, mapX, caracterX, caracterY);
-
+	
+	std::cin >> input;
 	if (input == KEY_SPACE)
 	{
 		CapturingPokemon(caracterX, caracterY,pokeCach,mapa);
 	}
 	else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
 	{
-		int move = CharacterMovement(input);
+		move = CharacterMovement(input);
+		if (move == -1)
+		{
+			std::cout << "Entrada no reconocida." << std::endl;
+		}
+		else if (move == 5)
+		{
+			caracterY++;
+		}
+		else if (move == 6)
+		{
+			caracterY--;
+		}
+		else if (move == 7)
+		{
+			caracterX++;
+		}
+		else if (move == 8)
+		{
+			caracterX--;
+		}
 	}
 	
 }

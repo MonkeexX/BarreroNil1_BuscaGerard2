@@ -21,11 +21,10 @@ int main()
 	int mapY = 0;
 	//srand(time(NULL));
 
-
-
 	int X = 10, Y = 10; // Min position of player is 5, 5
 
 	int input = 0;
+	std::cin >> input;
 	int counterI = 0;
 	int counterJ = 0;
 	int caracterPosition = 0;
@@ -39,6 +38,7 @@ int main()
 
 	//To know the number of pokemon captured
 	int captured = 10;
+	int pokeCach = 0;
 
 	//Read from files
 	ifstream config;
@@ -51,7 +51,7 @@ int main()
 		config >> forest;
 		config >> cave;
 	}
-	int** mapa = new int*[mapX];
+	int** mapa = new int* [mapX + 40];
 	for (int i = 0; i < mapX; ++i)
 	{
 		mapa[i] = new int[mapY];
@@ -59,5 +59,15 @@ int main()
 
 	MapInitiation(mapa, mapY, mapX);
 	AddPokemonToMap(mapa, mapY, mapX);
-	PrintMap(mapa, mapY, mapX);
+	PrintMap(mapa, mapY, mapX, caracterX, caracterY);
+
+	if (input == KEY_SPACE)
+	{
+		CapturingPokemon(caracterX, caracterY,pokeCach,mapa);
+	}
+	else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
+	{
+		int move = CharacterMovement(input);
+	}
+	
 }

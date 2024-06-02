@@ -2,7 +2,6 @@
 #include<iostream>
 #include <conio.h>
 #include <fstream>
-#define MAPSIZE 20
 #define MAXPOKE 200
 #include "HeaderPokeenti.h"
 #include <fstream>
@@ -12,20 +11,9 @@
 #define KEY_LEFT 75
 #define KEY_SPACE 32
 
-
-//void mapCopy(char map[MAPSIZE][MAPSIZE])
-//{
-//for (int i = 0; i < MAPSIZE; i++)
-//{
-//for (int j = 0; j < MAPSIZE; j++)
-//{
-//*mapSice[i][j] = &map[i][j];
-//}
-//}
-//}
-
 void MapInitiation(int** map, int  mapY, int mapX)
 {
+	map[10][10] = 6;
 	//Firts we create a map in blank
 	for (int i = 0; i < mapX; ++i)
 	{
@@ -45,11 +33,7 @@ void MapInitiation(int** map, int  mapY, int mapX)
 			}
 		}
 	}
-
-	//Then we will create a map with the walls
-
-
-
+	map[10][10] = 6;
 }
 
 void AddPokemonToMap(int** map, int  mapY, int mapX)
@@ -66,14 +50,14 @@ void AddPokemonToMap(int** map, int  mapY, int mapX)
 	}
 }
 
-void PrintMap(int** map, int  mapY, int mapX)
+void PrintMap(int** map, int  mapY, int mapX, int posX, int posY)
 {
 
-	for (int i = 0; i < mapX; ++i)
+	for (int i = 0; i < 20; ++i)
 	{
-		for (int j = 0; j < mapY; ++j)
+		for (int j = 0; j < 20; ++j)
 		{
-			if (i == mapX/2 || j == mapY/2)
+			if (i == mapX / 2 || j == mapY / 2)
 			{
 				std::cout << "X";
 			}
@@ -81,7 +65,24 @@ void PrintMap(int** map, int  mapY, int mapX)
 			{
 				std::cout << "P";
 			}
-			else
+			//Now for the character movement
+			else if (map[i][j] == 5)
+			{
+				std::cout << "^";
+			}
+			else if (map[i][j] == 6)
+			{
+				std::cout << "v";
+			}
+			else if (map[i][j] == 7)
+			{
+				std::cout << ">";
+			}
+			else if (map[i][j] == 8)
+			{
+				std::cout << "<";
+			}
+			else if (map[i][j] == 0)
 			{
 				std::cout << " ";
 			}
@@ -146,9 +147,6 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 		y = posY++;
 		isTherePokemon = true;
 	}
-
-
-
 	if (isTherePokemon)
 	{
 		map[x][y] = ' ';
@@ -159,32 +157,24 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 
 int CharacterMovement(int input)
 {
-	if (input == KEY_UP)
+	switch (input)
 	{
+	case KEY_UP:
 		return 5;
-	}
-	else if (input == KEY_DOWN)
-	{
+	case KEY_DOWN:
 		return 6;
-	}
-	else if (input == KEY_RIGHT)
-	{
+	case KEY_RIGHT:
 		return 7;
-	}
-	else if (input == KEY_LEFT)
-	{
+	case KEY_LEFT:
 		return 8;
-	}
-	else if (input == KEY_SPACE)
-	{
+	case KEY_SPACE:
 		return 9;
+	default:
+		return -1; // Retorno por defecto en caso de entrada no reconocida
 	}
-
-
 }
 
 void PrintCaracter(int caracter, char c)
 {
 	std::cout << c, caracter;
 }
-

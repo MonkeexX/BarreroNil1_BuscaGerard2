@@ -1,15 +1,13 @@
 #pragma once
 #include<iostream>
 #include <conio.h>
-#include <fstream>
-#define MAXPOKE 200
-#include "HeaderPokeenti.h"
-#include <fstream>
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_RIGHT 77
 #define KEY_LEFT 75
 #define KEY_SPACE 32
+#define MAXPOKE 100
+
 
 void MapInitiation(int** map, int  mapY, int mapX)
 {
@@ -19,28 +17,43 @@ void MapInitiation(int** map, int  mapY, int mapX)
 	{
 		for (int j = 0; j < mapY; ++j)
 		{
-			if (i == mapX / 2)
-			{
-				map[i][j] = 1;
-			}
-			if (j == mapY / 2)
-			{
-				map[i][j] = 1;
-			}
-			else
-			{
-				map[i][j] = 0;
-			}
+			map[i][j] = 0;
+		}
+
+		for (int i = 0; i < mapY; ++i)
+		{
+			map[mapX / 2][i] = 1;
+		}
+
+		for (int i = 0; i < mapX; ++i)
+		{
+			map[i][mapY / 2] = 1;
 		}
 	}
 	map[0][0] =6;
 }
 
-void UnlockZones(int captured, int paleta, int forest, int cave, int** map)
+void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int mapX, int mapY)
 {
 	if (captured >= paleta)
 	{
+		for (int j =0; j < (mapY / 2)-10; j++)
+		{
+			map[j][mapY/2]= 0;
+		}
+	}
 
+	if (captured >= forest)
+	{
+		for (int j = (mapX / 2) +11; j < mapX+21; j++)
+		{
+			map[mapX/2][j] = 0;
+		}
+	}
+
+	for (int j =0; j < (mapY); ++j)
+	{
+		map[j][mapX / 2] = 0;
 	}
 }
 
@@ -76,11 +89,11 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 	{
 		posY = mapY;
 	}
-	for (int i = posXMin; i < posX; ++i)
+	for (int i = posXMin; i < mapX; ++i)
 	{
-		for (int j = posXMin; j < posX; ++j)
+		for (int j = posYMin; j < mapY; ++j)
 		{
-			if (i == mapX / 2 || j == mapY / 2)
+			if (map[i][j] == 1)
 			{
 				std::cout << "X";
 			}

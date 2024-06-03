@@ -40,7 +40,7 @@ int main()
 	int cave = 8;
 
 	//To know the number of pokemon captured
-	int captured = 10;
+	int captured = 100;
 
 	//Read from files
 	ifstream config;
@@ -58,8 +58,9 @@ int main()
 	{
 		mapa[i] = new int[mapY];
 	}
-
+	
 	MapInitiation(mapa, mapY, mapX);
 	AddPokemonToMap(mapa, mapY, mapX);
+	UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 	PrintMap(mapa, mapY, mapX, caracterX, caracterY, caracterXMin, caracterYMin);
 }

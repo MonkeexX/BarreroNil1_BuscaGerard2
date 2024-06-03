@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#define MAXPOKE 100
 void MapInitiation(int** map, int  mapY, int mapX)
 {
 	map[10][10] = 6;
@@ -28,7 +29,7 @@ void MapInitiation(int** map, int  mapY, int mapX)
 void AddPokemonToMap(int** map, int  mapY, int mapX)
 {
 	//Pokemon = 2
-	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE; pokemonGenerated++)
+	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE ; pokemonGenerated++)
 	{
 		int posX = rand() % mapX;
 		int posY = rand() % mapY;

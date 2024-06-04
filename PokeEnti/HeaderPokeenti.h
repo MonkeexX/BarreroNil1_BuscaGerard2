@@ -8,6 +8,18 @@
 #define KEY_SPACE 32
 #define MAXPOKE 100
 
+enum class Nature {
+	TRANQUILA, //Horizontal
+	PICARA, //Diagonal
+	FUERTE, //Vertical
+	COUNT,
+	INVALID
+};
+
+void PrintPokemonNum(int captured)
+{
+	std::cout << "Number of Pokemon captured: " << captured << std::endl;
+}
 
 void MapInitiation(int** map, int  mapY, int mapX)
 {
@@ -51,10 +63,8 @@ void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int 
 		}
 	}
 
-	for (int j =0; j < (mapY); ++j)
-	{
-		map[j][mapX / 2] = 0;
-	}
+
+
 }
 
 void AddPokemonToMap(int** map, int  mapY, int mapX)
@@ -191,7 +201,7 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 	return capturedPoke;
 }
 
-int CharacterMovement(int input)
+int CharacterMovement(char input)
 {
 	if (input == KEY_UP)
 	{

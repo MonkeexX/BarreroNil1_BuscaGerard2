@@ -38,9 +38,11 @@ int main()
 	int town = 4;
 	int forest = 7;
 	int cave = 8;
-
+	int leave = 0;
+	bool gameLoop = true;
 	//To know the number of pokemon captured
-	int captured = 100;
+	int captured = 0;
+	char inputChar;
 
 	//Read from files
 	ifstream config;
@@ -61,6 +63,20 @@ int main()
 	
 	MapInitiation(mapa, mapY, mapX);
 	AddPokemonToMap(mapa, mapY, mapX);
-	UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 	PrintMap(mapa, mapY, mapX, caracterX, caracterY, caracterXMin, caracterYMin);
+	while (gameLoop)
+	{
+		UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
+		PrintPokemonNum(captured);
+		std::cin >> inputChar;
+		CharacterMovement(inputChar);
+		PrintMap(mapa, mapY, mapX, caracterX, caracterY, caracterXMin, caracterYMin);
+		std::cout << "You want to leave? 1 -> Yes      0 -> No" << std::endl;
+		std::cin >> input;
+
+		if (input == 1)
+		{
+			gameLoop = false;
+		}
+	}
 }

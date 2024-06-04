@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="Capture.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Menus and Screens.h" />
     <ClInclude Include="Move.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

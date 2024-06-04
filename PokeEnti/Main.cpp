@@ -7,7 +7,7 @@
 #include "Capture.h"
 #include "Map.h"
 #include "Move.h"
-
+#include "Menus and Screens.h"
 #define MAXPOKEMON 2
 #define KEY_UP 72
 #define KEY_DOWN 80
@@ -39,7 +39,8 @@ int main()
 	int forest = 7;
 	int cave = 8;
 	bool gameLoop = true;
-
+	bool inputPlayer = true;
+	bool playerWillPlay = true;
 	//To know the number of pokemon captured
 	int captured = 10;
 	int pokeCach = 0;
@@ -60,43 +61,51 @@ int main()
 	{
 		mapa[i] = new int[mapY];
 	}
-
-	MapInitiation(mapa, mapY, mapX);
-	AddPokemonToMap(mapa, mapY, mapX);
-
-	while (gameLoop)
+	InitScreen();
+	MainMenu(inputPlayer, playerWillPlay);
+	if (playerWillPlay)
 	{
-		PrintMap(mapa, mapY, mapX, caracterX, caracterY);
+		MapInitiation(mapa, mapY, mapX);
+		AddPokemonToMap(mapa, mapY, mapX);
 
-		std::cin >> input;
-		if (input == KEY_SPACE)
+		while (gameLoop)
 		{
-			CapturingPokemon(caracterX, caracterY, pokeCach, mapa);
+			PrintMap(mapa, mapY, mapX, caracterX, caracterY);
+
+			std::cin >> input;
+			if (input == KEY_SPACE)
+			{
+				CapturingPokemon(caracterX, caracterY, pokeCach, mapa);
+			}
+			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
+			{
+				move = CharacterMovement(input);
+				if (move == -1)
+				{
+					std::cout << "Entrada no reconocida." << std::endl;
+				}
+				else if (move == 5)
+				{
+					caracterY++;
+				}
+				else if (move == 6)
+				{
+					caracterY--;
+				}
+				else if (move == 7)
+				{
+					caracterX++;
+				}
+				else if (move == 8)
+				{
+					caracterX--;
+				}
+			}
+			Sleep(1000);
 		}
-		else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
-		{
-			move = CharacterMovement(input);
-			if (move == -1)
-			{
-				std::cout << "Entrada no reconocida." << std::endl;
-			}
-			else if (move == 5)
-			{
-				caracterY++;
-			}
-			else if (move == 6)
-			{
-				caracterY--;
-			}
-			else if (move == 7)
-			{
-				caracterX++;
-			}
-			else if (move == 8)
-			{
-				caracterX--;
-			}
-		}
-		Sleep(1000);
+	}
+	if (!playerWillPlay)
+	{
+		std::cout << "EXITOOOOO";
 	}
 }

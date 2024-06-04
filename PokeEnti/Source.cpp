@@ -44,6 +44,11 @@ int main()
 	int captured = 0;
 	char inputChar;
 
+	int pikachu;
+	int pokeHealth;
+	int mewtwoHealth;
+	int minTime;
+	int maxTime;
 	//Read from files
 	ifstream config;
 	config.open("config.txt", ios::in | ios::app);
@@ -54,6 +59,11 @@ int main()
 		config >> town;
 		config >> forest;
 		config >> cave;
+		config >> pikachu;
+		config >> pokeHealth;
+		config >> mewtwoHealth;
+		config >> minTime;
+		config >> maxTime;
 	}
 	int** mapa = new int* [mapX + 40];
 	for (int i = 0; i < mapX; ++i)

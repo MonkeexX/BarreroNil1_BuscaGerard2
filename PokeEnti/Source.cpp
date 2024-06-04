@@ -73,6 +73,7 @@ int main()
 	
 	MapInitiation(mapa, mapY, mapX);
 	AddPokemonToMap(mapa, mapY, mapX);
+	AddPokeballsToMap(mapa, mapY, mapX);
 	PrintMap(mapa, mapY, mapX, caracterX, caracterY, caracterXMin, caracterYMin);
 	while (gameLoop)
 	{
@@ -80,6 +81,7 @@ int main()
 		PrintPokemonNum(captured);
 		std::cin >> inputChar;
 		CharacterMovement(inputChar);
+
 		PrintMap(mapa, mapY, mapX, caracterX, caracterY, caracterXMin, caracterYMin);
 		std::cout << "You want to leave? 1 -> Yes      0 -> No" << std::endl;
 		std::cin >> input;

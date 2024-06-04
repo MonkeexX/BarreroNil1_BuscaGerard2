@@ -148,6 +148,20 @@ void AddPokemonToMap(int** map, int  mapY, int mapX)
 		}
 	}
 }
+void AddPokeballsToMap(int** map, int mapX, int mapY)
+{
+	bool hasGeneratedWell = false;
+	int posX = rand() % mapX;
+	int posY = rand() % mapY;
+	while (!hasGeneratedWell)
+	{
+		if (map[posX][posY] != 1 && map[posX][posY] != 2)
+		{
+			hasGeneratedWell = true;
+			map[posX][posY] = 3;
+		}
+	}
+}
 
 void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, int posYMin)
 {
@@ -178,6 +192,10 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 			else if (map[i][j] == 2)
 			{
 				std::cout << "P";
+			}
+			else if (map[i][j] == 3)
+			{
+				std::cout << "O";
 			}
 			//Now for the character movement
 			else if (map[i][j] == 5)

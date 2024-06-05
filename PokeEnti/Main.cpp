@@ -67,6 +67,7 @@ int main()
 		config >> minTime;
 		config >> maxTime;
 	}
+	config.close();
 	int** mapa = new int* [mapX + 40];
 	for (int i = 0; i < mapX; ++i)
 	{

@@ -7,16 +7,24 @@ enum class Nature {
 	FUERTE, //Vertical
 	INVALID
 };
+
 class Pokemon
 {
 private:
 	Nature nature = Nature::INVALID;
 	int posX;
 	int posY;
+	int life;
 
 public:
 	//Contructor
-	Pokemon(Nature nature)
+	
+	void PokemonLife(int pokeHealth)
+	{
+		life = pokeHealth;
+	}
+
+	void PokemonNature(Nature nature)
 	{
 		int random = rand() % 3;
 

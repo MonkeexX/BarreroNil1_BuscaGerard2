@@ -58,18 +58,17 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 	}
 	if (isTherePokemon)
 	{
-		//Combat();
+		Combat();
 	}
 	return capturedPoke;
 }
 
-/*
 void Combat()
 {
 	//Capturar Pokémon:
-	if ( < 0)
+	if (pokeballs < 0)
 	{
-		int capture = rand() %  //vida poquemon;
+		int capture = rand() % life;
 			if (capture <= 20)
 			{
 				map[x][y] = ' ';

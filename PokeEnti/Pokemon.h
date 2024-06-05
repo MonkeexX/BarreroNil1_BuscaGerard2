@@ -14,15 +14,9 @@ private:
 	Nature nature = Nature::INVALID;
 	int posX;
 	int posY;
-	int life;
 
 public:
 	//Contructor
-	
-	void PokemonLife(int pokeHealth)
-	{
-		life = pokeHealth;
-	}
 
 	void PokemonNature(Nature nature)
 	{

@@ -1,4 +1,5 @@
 #pragma once
+#include "Pokemon.h"
 
 int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 {

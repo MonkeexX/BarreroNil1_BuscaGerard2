@@ -43,7 +43,7 @@ int main()
 	bool inputPlayer = true;
 	bool playerWillPlay = true;
 	//To know the number of pokemon captured
-	int captured = 10;
+	int captured = 0;
 	int pokeCach = 0;
 	int pikachu;
 	int pokeHealth;
@@ -90,7 +90,7 @@ int main()
 			std::cin >> input;
 			if (input == KEY_SPACE)
 			{
-				CapturingPokemon(characterX, characterY, pokeCach, mapa);
+				CapturingPokemon(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu);
 			}
 			else if (input == 7 || input == 6 || input == 8 || input == 9)
 			{
@@ -114,10 +114,18 @@ int main()
 				}
 			}
 			Sleep(1000);
+			system("cls");
 		}
 	}
 	if (!playerWillPlay)
 	{
-		
+
+		for (int i = 0; i < mapX; ++i)
+		{
+			delete mapa[i];
+		}
+		delete mapa;
+		mapa = nullptr;
+
 	}
 }

@@ -106,9 +106,9 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 	{
 		posY = mapY;
 	}
-	for (int i = posXMin; i < mapX; ++i)
+	for (int i = posXMin; i < posX+20; ++i)
 	{
-		for (int j = posYMin; j < mapY; ++j)
+		for (int j = posYMin; j < posY+20; ++j)
 		{
 			if (map[i][j] == 1)
 			{

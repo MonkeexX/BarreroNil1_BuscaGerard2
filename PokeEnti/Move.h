@@ -17,18 +17,16 @@ int CharacterMovement(int input, int characterX, int characterY)
 	switch (input)
 	{
 	case 6: // up
-		std::cout << "hello1";
 		return characterY +1;
 
 			break;
-	case 7:
-
+	case 7: //down
 		return characterY -1;
 		break;
-	case 8:
+	case 8: // right
 		return characterX +1;
 		break;
-	case 9: 
+	case 9: //left
 		return characterX -1;
 		break;
 	}

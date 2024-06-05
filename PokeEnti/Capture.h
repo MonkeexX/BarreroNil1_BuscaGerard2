@@ -1,7 +1,40 @@
 #pragma once
 #include "Pokemon.h"
 
-int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
+int Combat(int pokeballs, int life, int x, int y, int** map, int capturedPoke, int pikachu)
+{
+	//Capturar Pokémon:
+	if (pokeballs < 0)
+	{
+		int capture = rand() % life;
+		if (capture <= 20)
+		{
+			map[x][y] = ' ';
+			capturedPoke++;
+			return capturedPoke;
+		}
+	}
+	else
+	{
+		std::cout << "You don't have pokeballs";
+	}
+
+	//Atacar:
+	if (life > 0)
+	{
+		//hacer daño
+		life = -pikachu;
+		if (life < 1)
+		{
+			map[x][y] = ' ';
+		}
+	}
+
+	//Huir:
+	//quitae menu pelea
+}
+
+int CapturingPokemon(int posX, int posY, int capturedPoke, int** map, int pokeballs, int life, int pikachu)
 {
 	bool isTherePokemon = false;
 
@@ -58,42 +91,10 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 	}
 	if (isTherePokemon)
 	{
-		Combat();
+		Combat(pokeballs, life, x, y, map, capturedPoke, pikachu);
 	}
 	return capturedPoke;
 }
-
-void Combat()
-{
-	//Capturar Pokémon:
-	if (pokeballs < 0)
-	{
-		int capture = rand() % life;
-			if (capture <= 20)
-			{
-				map[x][y] = ' ';
-				capturedPoke++;
-			}
-	}
-	else
-	{
-		std::cout << "You don't have pokeballs";
-	}
-
-	//Atacar:
-	if (life > 0)
-	{
-		//hacer daño
-		if (life < 1)
-		{
-			map[x][y] = ' ';
-		}
-	}
-
-	//Huir:
-	//quitae menu pelea
-}
-*/
 
 void PrintPokemonNum(int captured)
 {

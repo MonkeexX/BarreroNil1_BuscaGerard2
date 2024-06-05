@@ -85,12 +85,12 @@ int main()
 		{
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
-			PrintMap(mapa, mapY, mapX, caracterX, caracterY);
+			PrintMap(mapa, mapY, mapX, caracterX, caracterY, mapX, mapY);
 
 			std::cin >> input;
 			if (input == KEY_SPACE)
 			{
-				CapturingPokemon(caracterX, caracterY, pokeCach, mapa);
+				CapturingPokemon(caracterX, caracterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu);
 			}
 			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
 			{
@@ -117,6 +117,7 @@ int main()
 				}
 			}
 			Sleep(1000);
+			
 		}
 	}
 	if (!playerWillPlay)

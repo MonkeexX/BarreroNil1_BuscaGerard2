@@ -58,17 +58,18 @@ int CapturingPokemon(int posX, int posY, int capturedPoke, int** map)
 	}
 	if (isTherePokemon)
 	{
-		Combat();
+		//Combat();
 	}
 	return capturedPoke;
 }
 
+/*
 void Combat()
 {
 	//Capturar Pokémon:
-	if (pokebols < 0)
+	if ( < 0)
 	{
-		new int capture = rand() % //vida poquemon;
+		int capture = rand() %  //vida poquemon;
 			if (capture <= 20)
 			{
 				map[x][y] = ' ';
@@ -77,7 +78,7 @@ void Combat()
 	}
 	else
 	{
-		std::cout "You d'ont have pokebals";
+		std::cout << "You don't have pokeballs";
 	}
 
 	//Atacar:
@@ -93,6 +94,7 @@ void Combat()
 	//Huir:
 	//quitae menu pelea
 }
+*/
 
 void PrintPokemonNum(int captured)
 {

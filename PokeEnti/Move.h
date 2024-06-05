@@ -12,19 +12,24 @@
 
 
 
-int CharacterMovement(int input)
+int CharacterMovement(int input, int characterX, int characterY)
 {
 	switch (input)
 	{
+	case 6: // up
+		std::cout << "hello1";
+		return characterY +1;
+
+			break;
 	case 7:
-		return 5;
-	case KEY_DOWN:
-		return 8;
-	case KEY_RIGHT:
-		return 9;
-	case KEY_LEFT:
-		return 5;
-	default:
-		return -1; // Retorno por defecto en caso de entrada no reconocida
+
+		return characterY -1;
+		break;
+	case 8:
+		return characterX +1;
+		break;
+	case 9: 
+		return characterX -1;
+		break;
 	}
 }

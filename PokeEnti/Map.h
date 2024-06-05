@@ -1,7 +1,7 @@
 #pragma once
 #include<iostream>
 #define MAXPOKE 100
-void MapInitiation(int** map, int  mapY, int mapX)
+void MapInitiation(int** map, int  mapY, int mapX, int characterX, int characterY)
 {
 
 	//Firts we create a map in blank
@@ -22,7 +22,7 @@ void MapInitiation(int** map, int  mapY, int mapX)
 			map[j][mapY / 2] = 1;
 		}
 	}
-	map[0][0] = 6;
+	map[characterX][characterY] = 6;
 }
 
 void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int mapX, int mapY)
@@ -88,6 +88,8 @@ void AddPokeballsToMap(int** map, int mapX, int mapY)
 
 void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, int posYMin)
 {
+
+	map[posX][posY] = 6;
 	if (posXMin < 0)
 	{
 		posXMin = 0;
@@ -142,6 +144,7 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 				std::cout << " ";
 			}
 		}
+
 		std::cout << "\n";
 	}
 }

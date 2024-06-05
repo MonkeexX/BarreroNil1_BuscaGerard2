@@ -31,9 +31,9 @@ int main()
 	int move;
 	int counterI = 0;
 	int counterJ = 0;
-	int caracterPosition = 0;
-	int caracterX = 5;
-	int caracterY = 5;
+	int characterPosition = 0;
+	int characterX = 1;
+	int characterY = 1;
 	char caracter = '>';
 	int league = 6;
 	int town = 4;
@@ -77,7 +77,7 @@ int main()
 	MainMenu(inputPlayer, playerWillPlay);
 	if (playerWillPlay)
 	{
-		MapInitiation(mapa, mapY, mapX);
+		MapInitiation(mapa, mapY, mapX, characterX, characterY);
 		AddPokemonToMap(mapa, mapY, mapX);
 		AddPokeballsToMap(mapa, mapY, mapX);
 
@@ -85,36 +85,32 @@ int main()
 		{
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
-			PrintMap(mapa, mapY, mapX, caracterX, caracterY, minX, minY);
+			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY);
 
 			std::cin >> input;
 			if (input == KEY_SPACE)
 			{
-				CapturingPokemon(caracterX, caracterY, pokeCach, mapa);
+				CapturingPokemon(characterX, characterY, pokeCach, mapa);
 			}
-			else if (input == 7 || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
+			else if (input == 7 || input == 6 || input == 8 || input == 9)
 			{
-				move = CharacterMovement(input);
-				if (move == -1)
+				switch (input)
 				{
-					std::cout << "Entrada no reconocida." << std::endl;
-				}
-				else if (move == 5)
-				{
-					caracterY++;
-				}
-				else if (move == 6)
-				{
-					caracterY--;
-				}
-				else if (move == 7)
-				{
-					std::cout << "CAGASTE";
-					caracterX++;
-				}
-				else if (move == 8)
-				{
-					caracterX--;
+				case 6:
+					characterY = CharacterMovement(input, characterX, characterY);
+					break;
+				case 7:
+					std::cout << characterY;
+					characterY = CharacterMovement(input, characterX, characterY);
+					std::cout << characterY;
+
+					break;
+				case 8:
+					characterX = CharacterMovement(input, characterX, characterY);
+					break;
+				case 9:
+					characterX = CharacterMovement(input, characterX, characterY);
+					break;
 				}
 			}
 			Sleep(1000);

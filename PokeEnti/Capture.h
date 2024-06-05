@@ -93,3 +93,8 @@ void Combat()
 	//Huir:
 	//quitae menu pelea
 }
+
+void PrintPokemonNum(int captured)
+{
+	std::cout << "Number of Pokemon captured: " << captured << std::endl;
+}

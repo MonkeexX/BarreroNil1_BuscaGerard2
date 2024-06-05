@@ -12,14 +12,14 @@ void MapInitiation(int** map, int  mapY, int mapX)
 			map[i][j] = 0;
 		}
 
-		for (int i = 0; i < mapY; ++i)
+		for (int j = 0; j < mapY; ++j)
 		{
-			map[mapX / 2][i] = 1;
+			map[mapX / 2][j] = 1;
 		}
 
-		for (int i = 0; i < mapX; ++i)
+		for (int j = 0; j < mapX; ++j)
 		{
-			map[i][mapY / 2] = 1;
+			map[j][mapY / 2] = 1;
 		}
 	}
 	map[0][0] = 6;
@@ -27,9 +27,10 @@ void MapInitiation(int** map, int  mapY, int mapX)
 
 void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int mapX, int mapY)
 {
+	
 	if (captured >= paleta)
 	{
-		for (int j = 0; j < (mapY / 2) - 10; j++)
+		for (int j = 0; j < (mapY / 2)-10; j++)
 		{
 			map[j][mapY / 2] = 0;
 		}
@@ -37,13 +38,22 @@ void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int 
 
 	if (captured >= forest)
 	{
-		for (int j = (mapX / 2) + 11; j < mapX + 21; j++)
+		for (int j = (mapX / 2); j < mapX + 21; j++)
 		{
 			map[mapX / 2][j] = 0;
 		}
 	}
 
-
+	if (captured >= paleta)
+	{
+		for (int i = 0; i < mapX; i++)
+		{
+			for (int j = (mapY / 2); j < mapY; j++)
+			{
+				map[i][mapY / 2] = 0;
+			}
+		}
+	}
 
 }
 

@@ -16,14 +16,14 @@ int CharacterMovement(int input)
 {
 	switch (input)
 	{
-	case KEY_UP:
+	case 7:
 		return 5;
 	case KEY_DOWN:
-		return 6;
-	case KEY_RIGHT:
-		return 7;
-	case KEY_LEFT:
 		return 8;
+	case KEY_RIGHT:
+		return 9;
+	case KEY_LEFT:
+		return 5;
 	default:
 		return -1; // Retorno por defecto en caso de entrada no reconocida
 	}

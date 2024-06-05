@@ -50,7 +50,8 @@ int main()
 	int mewtwoHealth;
 	int minTime;
 	int maxTime;
-
+	int minX = 0;
+	int minY = 0;
 	//Read from files
 	ifstream config;
 	config.open("config.txt", ios::in | ios::app);
@@ -84,14 +85,14 @@ int main()
 		{
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
-			PrintMap(mapa, mapY, mapX, caracterX, caracterY);
+			PrintMap(mapa, mapY, mapX, caracterX, caracterY, minX, minY);
 
 			std::cin >> input;
 			if (input == KEY_SPACE)
 			{
 				CapturingPokemon(caracterX, caracterY, pokeCach, mapa);
 			}
-			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
+			else if (input == 7 || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
 			{
 				move = CharacterMovement(input);
 				if (move == -1)
@@ -108,6 +109,7 @@ int main()
 				}
 				else if (move == 7)
 				{
+					std::cout << "CAGASTE";
 					caracterX++;
 				}
 				else if (move == 8)
@@ -120,6 +122,6 @@ int main()
 	}
 	if (!playerWillPlay)
 	{
-		std::cout << "EXITOOOOO";
+		
 	}
 }

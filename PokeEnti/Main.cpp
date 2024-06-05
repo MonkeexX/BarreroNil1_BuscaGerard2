@@ -90,7 +90,7 @@ int main()
 			std::cin >> input;
 			if (input == KEY_SPACE)
 			{
-				CapturingPokemon(caracterX, caracterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu);
+				CapturingPokemon(inputPlayer, caracterX, caracterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu);
 			}
 			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
 			{
@@ -116,8 +116,8 @@ int main()
 					caracterX--;
 				}
 			}
-			Sleep(1000);
-			
+			Sleep(100);
+			std::system("clear");
 		}
 	}
 	if (!playerWillPlay)

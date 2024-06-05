@@ -4,7 +4,6 @@
 #define MAXPOKE 100
 void MapInitiation(int** map, int  mapY, int mapX)
 {
-
 	//Firts we create a map in blank
 	for (int i = 0; i < mapX; ++i)
 	{
@@ -44,8 +43,6 @@ void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int 
 		}
 	}
 
-
-
 }
 
 void AddPokemonToMap(int** map, int  mapY, int mapX)
@@ -53,7 +50,6 @@ void AddPokemonToMap(int** map, int  mapY, int mapX)
 	//Pokemon = 2
 	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE ; pokemonGenerated++)
 	{
-		Pokemon::PokemonNature();
 		int posX = rand() % mapX;
 		int posY = rand() % mapY;
 		if (map[posX][posY] != 1 && map[posX][posY] != 2)

@@ -28,5 +28,5 @@ void MainMenu(int inputPlayerMenu, bool play)
 
 void GameOver()
 {
-
+	std::cout << "Game Over";
 }

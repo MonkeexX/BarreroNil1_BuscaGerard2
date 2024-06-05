@@ -7,6 +7,7 @@
 #include "Capture.h"
 #include "Map.h"
 #include "Move.h"
+#include "Pokemon.h"
 #include "Menus and Screens.h"
 #define MAXPOKEMON 2
 #define KEY_UP 72
@@ -44,6 +45,11 @@ int main()
 	//To know the number of pokemon captured
 	int captured = 10;
 	int pokeCach = 0;
+	int pikachu;
+	int pokeHealth;
+	int mewtwoHealth;
+	int minTime;
+	int maxTime;
 
 	//Read from files
 	ifstream config;
@@ -55,6 +61,11 @@ int main()
 		config >> town;
 		config >> forest;
 		config >> cave;
+		config >> pikachu;
+		config >> pokeHealth;
+		config >> mewtwoHealth;
+		config >> minTime;
+		config >> maxTime;
 	}
 	int** mapa = new int* [mapX + 40];
 	for (int i = 0; i < mapX; ++i)
@@ -67,9 +78,12 @@ int main()
 	{
 		MapInitiation(mapa, mapY, mapX);
 		AddPokemonToMap(mapa, mapY, mapX);
+		AddPokeballsToMap(mapa, mapY, mapX);
 
 		while (gameLoop)
 		{
+			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
+			PrintPokemonNum(captured);
 			PrintMap(mapa, mapY, mapX, caracterX, caracterY);
 
 			std::cin >> input;

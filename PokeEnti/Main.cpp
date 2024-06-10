@@ -52,7 +52,7 @@ int main()
 	int maxTime;
 	int minX = 0;
 	int minY = 0;
-	int pokeballs = 100;
+	int pokeballs = 1;
 	//Read from files
 	ifstream config;
 	config.open("config.txt", ios::in | ios::app);
@@ -95,6 +95,10 @@ int main()
 				if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
 				{
 					Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
+					if (captured == ++captured)
+					{
+						--pokeballs;
+					}
 					std::cout << captured;
 				}
 			}

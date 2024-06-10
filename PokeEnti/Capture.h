@@ -11,7 +11,7 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int&
 		if (pokeballs > 0)
 		{
 			int capture = rand() % life;
-			if (capture <= 20)
+			if (capture < 20)
 			{
 				map[x++][y] = 0;
 				map[x--][y] = 0;
@@ -38,7 +38,7 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int&
 			life = -pikachu;
 			if (life < 1)
 			{
-				map[x][y] = ' ';
+				map[x][y] = 0;
 				return -1;
 			}
 		}

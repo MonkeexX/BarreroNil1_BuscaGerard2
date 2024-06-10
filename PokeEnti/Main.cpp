@@ -52,6 +52,7 @@ int main()
 	int maxTime;
 	int minX = 0;
 	int minY = 0;
+	int pokeballs = 100;
 	//Read from files
 	ifstream config;
 	config.open("config.txt", ios::in | ios::app);
@@ -88,9 +89,14 @@ int main()
 			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY);
 
 			std::cin >> input;
-			if (input == KEY_SPACE)
+			if (input == 10)
 			{
-				CapturingPokemon(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu);
+				
+				if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
+				{
+					Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
+					std::cout << captured;
+				}
 			}
 			else if (input == 7 || input == 6 || input == 8 || input == 9)
 			{

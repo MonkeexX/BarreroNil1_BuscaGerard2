@@ -10,21 +10,24 @@
 #define KEY_LEFT 75
 #define KEY_SPACE 32
 
-//test
 
-int CharacterMovement(int input)
+
+int CharacterMovement(int input, int characterX, int characterY)
 {
 	switch (input)
 	{
-	case KEY_UP:
-		return 5;
-	case KEY_DOWN:
-		return 6;
-	case KEY_RIGHT:
-		return 7;
-	case KEY_LEFT:
-		return 8;
-	default:
-		return -1; // Retorno por defecto en caso de entrada no reconocida
+	case 6: // up
+		return characterY + 1;
+
+		break;
+	case 7: //down
+		return characterY - 1;
+		break;
+	case 8: // right
+		return characterX + 1;
+		break;
+	case 9: //left
+		return characterX - 1;
+		break;
 	}
 }

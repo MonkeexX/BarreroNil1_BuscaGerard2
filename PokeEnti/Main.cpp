@@ -31,9 +31,9 @@ int main()
 	int move;
 	int counterI = 0;
 	int counterJ = 0;
-	int caracterPosition = 0;
-	int caracterX = 5;
-	int caracterY = 5;
+	int characterPosition = 0;
+	int characterX = 1;
+	int characterY = 1;
 	char caracter = '>';
 	int league = 6;
 	int town = 4;
@@ -43,14 +43,16 @@ int main()
 	bool inputPlayer = true;
 	bool playerWillPlay = true;
 	//To know the number of pokemon captured
-	int captured = 10;
+	int captured = 0;
 	int pokeCach = 0;
 	int pikachu;
 	int pokeHealth;
 	int mewtwoHealth;
 	int minTime;
 	int maxTime;
-
+	int minX = 0;
+	int minY = 0;
+	int pokeballs = 100;
 	//Read from files
 	ifstream config;
 	config.open("config.txt", ios::in | ios::app);
@@ -67,7 +69,6 @@ int main()
 		config >> minTime;
 		config >> maxTime;
 	}
-	config.close();
 	int** mapa = new int* [mapX + 40];
 	for (int i = 0; i < mapX; ++i)
 	{
@@ -77,7 +78,7 @@ int main()
 	MainMenu(inputPlayer, playerWillPlay);
 	if (playerWillPlay)
 	{
-		MapInitiation(mapa, mapY, mapX);
+		MapInitiation(mapa, mapY, mapX, characterX, characterY);
 		AddPokemonToMap(mapa, mapY, mapX);
 		AddPokeballsToMap(mapa, mapY, mapX);
 
@@ -85,43 +86,52 @@ int main()
 		{
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
-			PrintMap(mapa, mapY, mapX, caracterX, caracterY, mapX, mapY);
+			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY);
 
 			std::cin >> input;
-			if (input == KEY_SPACE)
+			if (input == 10)
 			{
-				CapturingPokemon(inputPlayer, caracterX, caracterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu);
-			}
-			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_SPACE)
-			{
-				move = CharacterMovement(input);
-				if (move == -1)
+
+				if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
 				{
-					std::cout << "Entrada no reconocida." << std::endl;
-				}
-				else if (move == 5)
-				{
-					caracterY++;
-				}
-				else if (move == 6)
-				{
-					caracterY--;
-				}
-				else if (move == 7)
-				{
-					caracterX++;
-				}
-				else if (move == 8)
-				{
-					caracterX--;
+					Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
+					std::cout << captured;
 				}
 			}
-			Sleep(100);
-			std::system("clear");
+			else if (input == 7 || input == 6 || input == 8 || input == 9)
+			{
+				switch (input)
+				{
+				case 6:
+					characterY = CharacterMovement(input, characterX, characterY);
+					break;
+				case 7:
+					std::cout << characterY;
+					characterY = CharacterMovement(input, characterX, characterY);
+					std::cout << characterY;
+
+					break;
+				case 8:
+					characterX = CharacterMovement(input, characterX, characterY);
+					break;
+				case 9:
+					characterX = CharacterMovement(input, characterX, characterY);
+					break;
+				}
+			}
+			Sleep(1000);
+			system("cls");
 		}
 	}
 	if (!playerWillPlay)
 	{
-		std::cout << "EXITOOOOO";
+
+		for (int i = 0; i < mapX; ++i)
+		{
+			delete mapa[i];
+		}
+		delete mapa;
+		mapa = nullptr;
+
 	}
 }

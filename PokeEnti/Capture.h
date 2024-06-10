@@ -1,20 +1,25 @@
 #pragma once
 #include "Pokemon.h"
 
-int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int capturedPoke, int pikachu)
+int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int& capturedPoke, int pikachu)
 {
+	std::cout << "Capturar: 3 \n Atacar: 4 \n Huir: 5 \n";
 	std::cin >> inputPlay;
-	std::cout << "Capturar: 5 \n Atacar: 6 \n Huir: 7 \n";
-	//Capturar Pokémon:
-	if (inputPlay == 5)
+	//To capture pokemon
+	if (inputPlay == 3)
 	{
-		if (pokeballs < 0)
+		if (pokeballs > 0)
 		{
 			int capture = rand() % life;
 			if (capture <= 20)
 			{
-				map[x][y] = ' ';
-				capturedPoke++;
+				map[x++][y] = 0;
+				map[x--][y] = 0;
+				map[x][y++] = 0;
+				map[x][y--] = 0;
+
+				std::cout << "The pokemon has been captured!" << "\n";
+				++capturedPoke;
 				return capturedPoke;
 			}
 		}
@@ -24,90 +29,88 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int 
 		}
 	}
 
-	//Atacar:
-	if (inputPlay == 6)
+
+	if (inputPlay == 4)
 	{
 		if (life > 0)
 		{
-			//hacer daño
+			//do damage
 			life = -pikachu;
 			if (life < 1)
 			{
 				map[x][y] = ' ';
-				return;
+				return -1;
 			}
 		}
 	}
 
-	//Huir:
-	if (inputPlay == 7)
+	//to run away
+	if (inputPlay == 5)
 	{
 		std::cout << "You run";
-		return;
+		return -1;
 	}
-	
+
 }
 
-int CapturingPokemon(int inputPlay, int posX, int posY, int capturedPoke, int** map, int pokeballs, int life, int pikachu)
+bool EnterCombat(int inputPlay, int posX, int posY, int capturedPoke, int** map, int pokeballs, int life, int pikachu)
 {
 	bool isTherePokemon = false;
-
 	//we will check every square next to the player
 	int x;
 	int y;
-	if (map[posX][posY++] == 1)
+	if (map[posX][++posY] == 2) //Hacia arriba
 	{
 		x = posX;
-		y = posY++;
+		y = ++posY;
 		isTherePokemon = true;
 	}
-	else if (map[posX++][posY++] == 1)
+	else if (map[++posX][--posY] == 2)
 	{
-		x = posX++;
-		y = posY++;
+		x = ++posX;
+		y = ++posY;
 		isTherePokemon = true;
 	}
-	if (map[posX++][posY] == 1)
+	if (map[++posX][posY] == 2)
 	{
-		x = posX++;
+		x = ++posX;
 		y = posY;
 		isTherePokemon = true;
 	}
-	if (map[posX++][posY--] == 1)
+	if (map[++posX][--posY] == 2)
 	{
-		x = posX++;
-		y = posY--;
+		x = ++posX;
+		y = --posY;
 		isTherePokemon = true;
 	}
-	if (map[posX][posY--] == 1)
+	if (map[posX][--posY] == 2)
 	{
 		x = posX;
-		y = posY--;
+		y = --posY;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY--] == 1)
+	if (map[--posX][--posY] == 2)
 	{
-		x = posX--;
-		y = posY--;
+		x = --posX;
+		y = --posY;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY] == 1)
+	if (map[--posX][posY] == 2)
 	{
-		x = posX--;
+		x = --posX;
 		y = posY;
 		isTherePokemon = true;
 	}
-	if (map[posX--][posY++] == 1)
+	if (map[--posX][++posY] == 2)
 	{
-		x = posX--;
-		y = posY++;
+		x = --posX;
+		y = ++posY;
 		isTherePokemon = true;
 	}
 	if (isTherePokemon)
-	{
-		Combat(inputPlay, pokeballs, life, x, y, map, capturedPoke, pikachu);
-	}
-	return capturedPoke;
+		return true;
+	else
+		return false;
 }
 
 void PrintPokemonNum(int captured)

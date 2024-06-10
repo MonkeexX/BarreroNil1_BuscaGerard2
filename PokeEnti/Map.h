@@ -1,9 +1,9 @@
 #pragma once
 #include<iostream>
-#include "Pokemon.h"
 #define MAXPOKE 100
-void MapInitiation(int** map, int  mapY, int mapX)
+void MapInitiation(int** map, int  mapY, int mapX, int characterX, int characterY)
 {
+
 	//Firts we create a map in blank
 	for (int i = 0; i < mapX; ++i)
 	{
@@ -12,21 +12,22 @@ void MapInitiation(int** map, int  mapY, int mapX)
 			map[i][j] = 0;
 		}
 
-		for (int i = 0; i < mapY; ++i)
+		for (int j = 0; j < mapY; ++j)
 		{
-			map[mapX / 2][i] = 1;
+			map[mapX / 2][j] = 1;
 		}
 
-		for (int i = 0; i < mapX; ++i)
+		for (int j = 0; j < mapX; ++j)
 		{
-			map[i][mapY / 2] = 1;
+			map[j][mapY / 2] = 1;
 		}
 	}
-	map[0][0] = 6;
+	map[characterX][characterY] = 6;
 }
 
 void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int mapX, int mapY)
 {
+
 	if (captured >= paleta)
 	{
 		for (int j = 0; j < (mapY / 2) - 10; j++)
@@ -37,9 +38,20 @@ void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int 
 
 	if (captured >= forest)
 	{
-		for (int j = (mapX / 2) + 11; j < mapX + 21; j++)
+		for (int j = (mapX / 2); j < mapX + 21; j++)
 		{
 			map[mapX / 2][j] = 0;
+		}
+	}
+
+	if (captured >= paleta)
+	{
+		for (int i = 0; i < mapX; i++)
+		{
+			for (int j = (mapY / 2); j < mapY; j++)
+			{
+				map[i][mapY / 2] = 0;
+			}
 		}
 	}
 
@@ -48,7 +60,7 @@ void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int 
 void AddPokemonToMap(int** map, int  mapY, int mapX)
 {
 	//Pokemon = 2
-	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE ; pokemonGenerated++)
+	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE; pokemonGenerated++)
 	{
 		int posX = rand() % mapX;
 		int posY = rand() % mapY;
@@ -76,6 +88,8 @@ void AddPokeballsToMap(int** map, int mapX, int mapY)
 
 void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, int posYMin)
 {
+
+	map[posX][posY] = 6;
 	if (posXMin < 0)
 	{
 		posXMin = 0;
@@ -92,9 +106,9 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 	{
 		posY = mapY;
 	}
-	for (int i = posXMin; i < mapX; ++i)
+	for (int i = posXMin; i < posX + 20; ++i)
 	{
-		for (int j = posYMin; j < mapY; ++j)
+		for (int j = posYMin; j < posY + 20; ++j)
 		{
 			if (map[i][j] == 1)
 			{
@@ -130,6 +144,7 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 				std::cout << " ";
 			}
 		}
+
 		std::cout << "\n";
 	}
 }

@@ -5,8 +5,8 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int 
 {
 	std::cin >> inputPlay;
 	std::cout << "Capturar: 5 \n Atacar: 6 \n Huir: 7 \n";
-	//Capturar Pokémon:
-	if (inputPlay == 5)
+	//To capture pokemon
+	if (inputPlay == 3)
 	{
 		if (pokeballs < 0)
 		{
@@ -24,12 +24,12 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int 
 		}
 	}
 
-	//Atacar:
-	if (inputPlay == 6)
+	
+	if (inputPlay == 4)
 	{
 		if (life > 0)
 		{
-			//hacer daño
+			//do damage
 			life = -pikachu;
 			if (life < 1)
 			{
@@ -39,8 +39,8 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int 
 		}
 	}
 
-	//Huir:
-	if (inputPlay == 7)
+	//to run away
+	if (inputPlay == 5)
 	{
 		std::cout << "You run";
 		return -1;

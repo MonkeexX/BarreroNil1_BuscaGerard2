@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Capture.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menus and Screens.cpp" />
+    <ClCompile Include="Move.cpp" />
+    <ClCompile Include="Pokemon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Capture.h" />

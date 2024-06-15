@@ -7,6 +7,7 @@ enum class Nature {
 	FUERTE, //Vertical
 	INVALID
 };
+
 class Pokemon
 {
 private:
@@ -16,7 +17,8 @@ private:
 
 public:
 	//Contructor
-	Pokemon(Nature nature)
+
+	void PokemonNature(Nature nature)
 	{
 		int random = rand() % 3;
 

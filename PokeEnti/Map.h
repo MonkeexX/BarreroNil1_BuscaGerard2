@@ -27,7 +27,7 @@ void MapInitiation(int** map, int  mapY, int mapX, int characterX, int character
 
 void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int mapX, int mapY)
 {
-	
+
 	if (captured >= paleta)
 	{
 		for (int j = 0; j < (mapY / 2)-10; j++)
@@ -60,7 +60,7 @@ void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int 
 void AddPokemonToMap(int** map, int  mapY, int mapX)
 {
 	//Pokemon = 2
-	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE ; pokemonGenerated++)
+	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE; pokemonGenerated++)
 	{
 		int posX = rand() % mapX;
 		int posY = rand() % mapY;
@@ -106,9 +106,9 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 	{
 		posY = mapY;
 	}
-	for (int i = posXMin; i < posX+20; ++i)
+	for (int i = posXMin; i < posX + 20; ++i)
 	{
-		for (int j = posYMin; j < posY+20; ++j)
+		for (int j = posYMin; j < posY + 20; ++j)
 		{
 			if (map[i][j] == 1)
 			{

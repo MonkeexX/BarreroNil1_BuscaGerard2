@@ -86,7 +86,7 @@ void AddPokeballsToMap(int** map, int mapX, int mapY)
 	}
 }
 
-void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, int posYMin)
+void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, int posYMin)
 {
 
 	map[posX][posY] = 6;
@@ -106,6 +106,24 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 	{
 		posY = mapY;
 	}
+	
+	if (map[--posX][posY] == 6)
+	{
+		map[--posX][posY] = 0;
+	}
+	if (map[++posX][posY] == 6)
+	{
+		map[++posX][posY] = 0;
+	}
+	if (map[posX][--posY] == 6)
+	{
+		map[posX][--posY] = 0;
+	}
+	if (map[posX][++posY] == 6)
+	{
+		map[posX][++posY] = 0;
+	}
+
 	for (int i = posXMin; i < posX + 20; ++i)
 	{
 		for (int j = posYMin; j < posY + 20; ++j)

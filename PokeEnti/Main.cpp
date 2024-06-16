@@ -68,6 +68,7 @@ int main()
 		config >> mewtwoHealth;
 		config >> minTime;
 		config >> maxTime;
+		config.close();
 	}
 	int** mapa = new int* [mapX + 40];
 	for (int i = 0; i < mapX; ++i)
@@ -88,7 +89,7 @@ int main()
 			PrintPokemonNum(captured);
 			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY);
 
-			std::cin >> input;
+			input = _getch();
 			if (input == 10)
 			{
 
@@ -102,23 +103,20 @@ int main()
 					std::cout << captured;
 				}
 			}
-			else if (input == 7 || input == 6 || input == 8 || input == 9)
+			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_LEFT)
 			{
 				switch (input)
 				{
-				case 6:
+				case KEY_UP:
 					characterY = CharacterMovement(input, characterX, characterY);
 					break;
-				case 7:
-					std::cout << characterY;
+				case KEY_DOWN:
 					characterY = CharacterMovement(input, characterX, characterY);
-					std::cout << characterY;
-
 					break;
-				case 8:
+				case KEY_RIGHT:
 					characterX = CharacterMovement(input, characterX, characterY);
 					break;
-				case 9:
+				case KEY_LEFT:
 					characterX = CharacterMovement(input, characterX, characterY);
 					break;
 				}

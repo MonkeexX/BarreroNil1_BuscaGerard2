@@ -14,20 +14,41 @@
 
 int CharacterMovement(int input, int characterX, int characterY)
 {
+
 	switch (input)
 	{
-	case 6: // up
-		return characterY + 1;
+	case KEY_UP: // up
+		return characterY - 1;
 
 		break;
-	case 7: //down
-		return characterY - 1;
+	case KEY_DOWN: //down
+		return characterY + 1;
 		break;
-	case 8: // right
+	case KEY_RIGHT: // right
 		return characterX + 1;
 		break;
-	case 9: //left
+	case KEY_LEFT: //left
 		return characterX - 1;
 		break;
+	}
+}
+
+std::string DetectZone(int mapX, int mapY)
+{
+	if (mapY <= (mapY / 2) && mapX <= (mapX/2))
+	{
+		return "Pueblo Paleta";
+	}
+	else if (mapY < (mapY / 2) && mapX > (mapX / 2))
+	{
+		return "Bosque";
+	}
+	else if (mapY > (mapY / 2) && mapX > (mapX / 2))
+	{
+		return "Cueva celeste";
+	}
+	else if (mapY > (mapY / 2) && mapX <= (mapX / 2))
+	{
+		return "Liga PokEnti";
 	}
 }

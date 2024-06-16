@@ -30,3 +30,10 @@ void GameOver()
 {
 	std::cout << "Game Over";
 }
+
+void UI(int capturedPokemons, int pokeballs, int mapX, int mapY)
+{
+	std::cout << "Pokemons Capturados: " << capturedPokemons << "      Pokeballs: " << pokeballs << std::endl;
+	std::string currentZone = DetectZone(mapX, mapY);
+	std::cout << currentZone << std::endl;
+}

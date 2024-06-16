@@ -94,12 +94,48 @@ int main()
 
 				if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
 				{
-					Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
-					if (captured == ++captured)
+					bool combat = true;
+					while (combat == true)
 					{
-						--pokeballs;
+						int comand = Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
+						switch (comand)
+						{
+						case 1:
+							++captured;
+							--pokeballs;
+							std::cout << "You captured pokemon"<< endl;
+							combat = false;
+						    break;
+						
+						case 2:
+							std::cout << "You don't captured pokemon"<<endl;
+							--pokeballs;
+						    break;
+
+						case 3:
+							std::cout << "You don't have pokeballs"<<endl;
+							break;
+
+						case 4:
+							pokeHealth = -pikachu;
+							std::cout << "pokemon life = " << pokeHealth << endl;
+							if (pokeHealth < 1)
+							{
+								mapa[X++][Y] = 0;
+								mapa[X--][Y] = 0;
+								mapa[X][Y++] = 0;
+								mapa[X][Y--] = 0;
+								combat = false;
+							}
+							break;
+
+						case 5:
+							std::cout << "You run";
+							combat = false;
+							break;
+						}
+
 					}
-					std::cout << captured;
 				}
 			}
 			else if (input == 7 || input == 6 || input == 8 || input == 9)

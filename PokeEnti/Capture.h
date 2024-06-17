@@ -5,7 +5,6 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int&
 {
 	std::cout << "Capturar: 3 \n Atacar: 4 \n Huir: 5 \n";
 	std::cin >> inputPlay;
-	std::cout << "Capturar: 5 \n Atacar: 6 \n Huir: 7 \n";
 	//To capture pokemon
 	if (inputPlay == 3)
 	{

@@ -53,6 +53,8 @@ int main()
 	int minX = 0;
 	int minY = 0;
 	int pokeballs = 1;
+	int oldX = 0;
+	int oldY = 0; 
 	//Read from files
 	ifstream config;
 	config.open("config.txt", ios::in | ios::app);
@@ -85,9 +87,10 @@ int main()
 
 		while (gameLoop)
 		{
+			UI(captured, pokeballs, characterX, characterY);
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
-			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY);
+			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, oldX, oldY);
 
 			input = _getch();
 			if (input == 10)
@@ -105,6 +108,8 @@ int main()
 			}
 			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_LEFT)
 			{
+				oldX = characterX;
+				oldY = characterY;
 				switch (input)
 				{
 				case KEY_UP:

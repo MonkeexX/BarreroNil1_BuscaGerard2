@@ -37,18 +37,18 @@ std::string DetectZone(int mapX, int mapY)
 {
 	if (mapY <= (mapY / 2) && mapX <= (mapX/2))
 	{
-		return "Pueblo Paleta";
+		return "Cueva Celeste";
 	}
 	else if (mapY < (mapY / 2) && mapX > (mapX / 2))
 	{
-		return "Bosque";
+		return "Liga PokEnti";
 	}
 	else if (mapY > (mapY / 2) && mapX > (mapX / 2))
 	{
-		return "Cueva celeste";
+		return "Pueblo Paleta";
 	}
 	else if (mapY > (mapY / 2) && mapX <= (mapX / 2))
 	{
-		return "Liga PokEnti";
+		return "Bosque";
 	}
 }

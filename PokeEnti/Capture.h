@@ -18,37 +18,28 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int&
 				map[x][y++] = 0;
 				map[x][y--] = 0;
 
-				std::cout << "The pokemon has been captured!" << "\n";
-				++capturedPoke;
-				return capturedPoke;
+				return 1;
 			}
+			else
+				return 2;
 		}
 		else
-		{
-			std::cout << "You don't have pokeballs";
-		}
+			return 3;
 	}
 
-	
 	if (inputPlay == 4)
 	{
 		if (life > 0)
 		{
 			//do damage
-			life = -pikachu;
-			if (life < 1)
-			{
-				map[x][y] = 0;
-				return -1;
-			}
+			return 4;
 		}
 	}
 
 	//to run away
 	if (inputPlay == 5)
 	{
-		std::cout << "You run";
-		return -1;
+		return 5;
 	}
 
 }

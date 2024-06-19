@@ -9,49 +9,49 @@ bool GetPokeball(int posX, int posY, int** map)
 	if (map[posX][++posY] == 3) //Hacia arriba
 	{
 		x = posX;
-		y = ++posY;
+		y = posY;
 		return true;
 	}
 	else if (map[++posX][--posY] == 3)
 	{
-		x = ++posX;
-		y = ++posY;
+		x = posX;
+		y = posY;
 		return true;
 	}
 	else if (map[++posX][posY] == 3)
 	{
-		x = ++posX;
+		x = posX;
 		y = posY;
 		return true;
 	}
 	if (map[++posX][--posY] == 3)
 	{
-		x = ++posX;
-		y = --posY;
+		x = posX;
+		y = posY;
 		return true;
 	}
 	else if (map[posX][--posY] == 3)
 	{
 		x = posX;
-		y = --posY;
+		y = posY;
 		return true;
 	}
 	else if (map[--posX][--posY] == 3)
 	{
-		x = --posX;
-		y = --posY;
+		x = posX;
+		y = posY;
 		return true;
 	}
 	else if (map[--posX][posY] == 3)
 	{
-		x = --posX;
+		x = posX;
 		y = posY;
 		return true;
 	}
 	else if (map[--posX][++posY] == 3)
 	{
-		x = --posX;
-		y = ++posY;
+		x = posX;
+		y = posY;
 		return true;
 	}
 	else

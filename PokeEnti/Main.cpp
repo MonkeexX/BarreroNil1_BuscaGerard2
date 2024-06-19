@@ -40,6 +40,7 @@ int main()
 	int forest = 7;
 	int cave = 8;
 	bool gameLoop = true;
+	bool mewtue = false;
 	bool inputPlayer = true;
 	bool playerWillPlay = true;
 	//To know the number of pokemon captured
@@ -54,7 +55,7 @@ int main()
 	int minY = 0;
 	int maxX = 0;
 	int maxY = 0;
-	int pokeballs = 1;
+	int pokeballs = 200;
 	int oldX = 0;
 	int oldY = 0; 
 	int minimumTown = 0;
@@ -103,30 +104,36 @@ int main()
 			//print
 			UI(captured, pokeballs, characterX, characterY, mapX, mapY);
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
-			PrintPokemonNum(captured);
 			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, maxX, maxY, oldX, oldY);
 			
 			//Calculate
 			input = _getch();
-			if (input == 32)
+			if (input == KEY_SPACE)
 			{
-				if (GetPokeball(characterX, characterY, mapa))
-				{
-					pokeballs++;
-				}
-				else if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
-				{
+					if (GetPokeball(characterX, characterY, mapa))
+					{
+						TakePokeball(mapa, characterX, characterY, pokeballs);
+					}
+					
+
+				    if (EnterCombat(characterX, characterY, mapa))
+				    {
+
 					int life = pokeHealth;
 					bool combat = true;
 					while (combat == true)
 					{
-						int comand = Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
+						int comand = Combat(inputPlayer, pokeballs, life, characterX, characterY, mapa, pikachu);
 						switch (comand)
 						{
 						case 1:
 							++captured;
 							--pokeballs;
 							std::cout << "You captured pokemon" << endl;
+							mapa[X++][Y] = 0;
+							mapa[X--][Y] = 0;
+							mapa[X][Y++] = 0;
+							mapa[X][Y--] = 0;
 							combat = false;
 							break;
 
@@ -144,10 +151,13 @@ int main()
 							std::cout << "pokemon life = " << life << endl;
 							if (life < 1)
 							{
+							std::cout << "You delet pokemon"<< endl;
+
 								mapa[X++][Y] = 0;
 								mapa[X--][Y] = 0;
 								mapa[X][Y++] = 0;
 								mapa[X][Y--] = 0;
+								
 								combat = false;
 							}
 							break;
@@ -160,9 +170,69 @@ int main()
 
 					}
 				}
+					
+					if (Mewtue(characterX, characterY, mapa))
+					{
+						int life = mewtwoHealth;
+						bool combat = true;
+						while (combat == true)
+						{
+							int comand = Combat(inputPlayer, pokeballs, life, characterX, characterY, mapa, pikachu);
+							switch (comand)
+							{
+							case 1:
+								++captured;
+								--pokeballs;
+								std::cout << "You captured Mewtue" << endl;
+								mapa[X++][Y] = 0;
+								mapa[X--][Y] = 0;
+								mapa[X][Y++] = 0;
+								mapa[X][Y--] = 0;
+								combat = false;
+								gameLoop = false;
+								mewtue = true;
+								break;
+
+							case 2:
+								std::cout << "You don't captured Mewtue" << endl;
+								--pokeballs;
+								break;
+
+							case 3:
+								std::cout << "You don't have any pokeballs" << endl;
+								gameLoop = false;
+								break;
+
+							case 4:
+								life -= pikachu;
+								std::cout << "Mewtue life = " << life << endl;
+								if (life < 1)
+								{
+									std::cout << "You delet Mewtue" << endl;
+
+									mapa[X++][Y] = 0;
+									mapa[X--][Y] = 0;
+									mapa[X][Y++] = 0;
+									mapa[X][Y--] = 0;
+
+									combat = false;
+									gameLoop = false;
+								}
+								break;
+
+							case 5:
+								std::cout << "You run";
+								combat = false;
+								gameLoop = false;
+								break;
+							}
+
+						}
+					}
 				
 			}
-			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_LEFT)
+			
+			if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_LEFT)
 			{
 				oldX = characterX;
 				oldY = characterY;
@@ -182,10 +252,11 @@ int main()
 					break;
 				}
 			}
-			Sleep(1000);
+			Sleep(10);
 			system("cls");
 		}
 	}
+	
 	if (!playerWillPlay)
 	{
 		//if the game ends or the player wants to leave
@@ -198,4 +269,6 @@ int main()
 		mapa = nullptr;
 
 	}
+
+	GameOver(mewtue);
 }

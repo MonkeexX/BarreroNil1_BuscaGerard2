@@ -24,7 +24,7 @@ void MapInitiation(int** map, int  mapY, int mapX, int characterX, int character
 	}
 	map[characterX][characterY] = 6; //This the character
 
-	map[mapX - 5][mapY - 5] = 9; //Mewtwo appears
+	map[mapX - 20][mapY - 20] = 9; //Mewtwo appears
 }
 
 void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int mapX, int mapY)
@@ -146,15 +146,15 @@ void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, i
 	if(posX != oldX and posY != oldY)
 	map[oldX][oldY] = 0; // This is to delete the old position
 
-	for (int i = posXMin; i < posX +30 ; ++i)
+	for (int i = posXMin; i < posX +5 ; ++i)
 	{
-		for (int j = posYMin; j < posY +30; ++j)
+		for (int j = posYMin; j < posY +5; ++j)
 		{
-			if (posX + 20 >= mapX)
+			if (posX + 5 >= mapX)
 			{
 				posX = mapX;
 			}
-			if (posY + 20 >= mapY)
+			if (posY + 5 >= mapY)
 			{
 				posY = mapY;
 			}

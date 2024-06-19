@@ -1,62 +1,6 @@
 #pragma once
 #include "Pokemon.h"
 
-bool GetPokeball(int posX, int posY, int** map)
-{
-	//we will check every square next to the player
-	int x;
-	int y;
-	if (map[posX][++posY] == 3) //Hacia arriba
-	{
-		x = posX;
-		y = posY;
-		return true;
-	}
-	else if (map[++posX][--posY] == 3)
-	{
-		x = posX;
-		y = posY;
-		return true;
-	}
-	else if (map[++posX][posY] == 3)
-	{
-		x = posX;
-		y = posY;
-		return true;
-	}
-	if (map[++posX][--posY] == 3)
-	{
-		x = posX;
-		y = posY;
-		return true;
-	}
-	else if (map[posX][--posY] == 3)
-	{
-		x = posX;
-		y = posY;
-		return true;
-	}
-	else if (map[--posX][--posY] == 3)
-	{
-		x = posX;
-		y = posY;
-		return true;
-	}
-	else if (map[--posX][posY] == 3)
-	{
-		x = posX;
-		y = posY;
-		return true;
-	}
-	else if (map[--posX][++posY] == 3)
-	{
-		x = posX;
-		y = posY;
-		return true;
-	}
-	else
-		return false;
-}
 bool TakePokeball(int ** map, int posX, int posY, int pokeballs)
 {
 	if (map[posX][++posY] == 3)
@@ -76,7 +20,7 @@ bool TakePokeball(int ** map, int posX, int posY, int pokeballs)
 		pokeballs++;
 
 	}
-	if (map[++posX][--posY] == 3)
+	else if (map[++posX][--posY] == 3)
 	{
 		map[++posX][--posY] = 0;
 		pokeballs++;
@@ -109,7 +53,7 @@ bool TakePokeball(int ** map, int posX, int posY, int pokeballs)
 	return true;
 }
 
-int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int& capturedPoke, int pikachu)
+int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int pikachu)
 {
 	std::cout << "Capturar: 3 \n Atacar: 4 \n Huir: 5 \n";
 	std::cin >> inputPlay;
@@ -149,70 +93,121 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int&
 	{
 		return 5;
 	}
-
 }
 
-bool EnterCombat(int inputPlay, int posX, int posY, int capturedPoke, int** map, int pokeballs, int life, int pikachu)
+bool EnterCombat(int posX, int posY, int** map)
 {
-	bool isTherePokemon = false;
 	//we will check every square next to the player
-	int x;
-	int y;
 	if (map[posX][++posY] == 2) //Hacia arriba
 	{
-		x = posX;
-		y = ++posY;
-		isTherePokemon = true;
+		return true;
 	}
 	else if (map[++posX][--posY] == 2)
 	{
-		x = ++posX;
-		y = ++posY;
-		isTherePokemon = true;
-	}
-	if (map[++posX][posY] == 2)
-	{
-		x = ++posX;
-		y = posY;
-		isTherePokemon = true;
-	}
-	if (map[++posX][--posY] == 2)
-	{
-		x = ++posX;
-		y = --posY;
-		isTherePokemon = true;
-	}
-	if (map[posX][--posY] == 2)
-	{
-		x = posX;
-		y = --posY;
-		isTherePokemon = true;
-	}
-	if (map[--posX][--posY] == 2)
-	{
-		x = --posX;
-		y = --posY;
-		isTherePokemon = true;
-	}
-	if (map[--posX][posY] == 2)
-	{
-		x = --posX;
-		y = posY;
-		isTherePokemon = true;
-	}
-	if (map[--posX][++posY] == 2)
-	{
-		x = --posX;
-		y = ++posY;
-		isTherePokemon = true;
-	}
-	if (isTherePokemon)
 		return true;
+	}
+	else if (map[++posX][posY] == 2)
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 2)
+	{
+		return true;
+	}
+	else if (map[posX][--posY] == 2)
+	{
+		return true;
+	}
+	else if (map[--posX][--posY] == 2)
+	{
+		return true;
+	}
+	else if (map[--posX][posY] == 2)
+	{
+		return true;
+	}
+	else if (map[--posX][++posY] == 2)
+	{
+		return true;
+	}
 	else
 		return false;
 }
 
-void PrintPokemonNum(int captured)
+bool GetPokeball(int posX, int posY, int** map)
 {
-	std::cout << "Number of Pokemon captured: " << captured << std::endl;
+	//we will check every square next to the player
+	if (map[posX][++posY] == 3) //Hacia arriba
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 3)
+	{
+		return true;
+	}
+	else if (map[++posX][posY] == 3)
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 3)
+	{
+		return true;
+	}
+	else if (map[posX][--posY] == 3)
+	{
+		return true;
+	}
+	else if (map[--posX][--posY] == 3)
+	{
+		return true;
+	}
+	else if (map[--posX][posY] == 3)
+	{
+		return true;
+	}
+	else if (map[--posX][++posY] == 3)
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+bool Mewtue(int posX, int posY, int** map)
+{
+	//we will check every square next to the player
+	if (map[posX][++posY] == 9) //Hacia arriba
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 9)
+	{
+		return true;
+	}
+	else if (map[++posX][posY] == 9)
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 9)
+	{
+		return true;
+	}
+	else if (map[posX][--posY] == 9)
+	{
+		return true;
+	}
+	else if (map[--posX][--posY] == 9)
+	{
+		return true;
+	}
+	else if (map[--posX][posY] == 9)
+	{
+		return true;
+	}
+	else if (map[--posX][++posY] == 9)
+	{
+		return true;
+	}
+	else
+		return false;
 }

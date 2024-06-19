@@ -3,7 +3,6 @@
 
 int GetPokeball(int posX, int posY, int** map)
 {
-	bool isTherePokemon = false;
 	//we will check every square next to the player
 	int x;
 	int y;
@@ -58,7 +57,7 @@ int GetPokeball(int posX, int posY, int** map)
 	else
 		return false;
 }
-void TakePokeball(int ** map, int posX, int posY, int pokeballs)
+bool TakePokeball(int ** map, int posX, int posY, int pokeballs)
 {
 	if (map[posX][++posY] == 3)
 	{
@@ -107,7 +106,7 @@ void TakePokeball(int ** map, int posX, int posY, int pokeballs)
 		pokeballs++;
 
 	}
-
+	return true;
 }
 
 int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int& capturedPoke, int pikachu)

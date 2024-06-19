@@ -23,6 +23,8 @@ void MapInitiation(int** map, int  mapY, int mapX, int characterX, int character
 		}
 	}
 	map[characterX][characterY] = 6;
+
+	map[mapX - 5][mapY - 5] = 9; //Mewtwo appears
 }
 
 void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int mapX, int mapY)
@@ -162,6 +164,10 @@ void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, i
 			else if (map[i][j] == 8)
 			{
 				std::cout << "<";
+			}
+			else if (map[i][j] == 9)
+			{
+				std::cout << "M";
 			}
 			else if (map[i][j] == 0)
 			{

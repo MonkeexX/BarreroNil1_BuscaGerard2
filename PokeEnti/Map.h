@@ -74,16 +74,15 @@ void AddPokemonToMap(int** map, int  mapY, int mapX, int captured, int paleta, i
 
 		while (!hasGeneratedWell)
 		{
-			if (captured <= paleta)
+			if (captured < paleta)
 			{
-				posX = rand() % (1 - (mapX / 2));
-				posY = rand() % (1 - (mapY / 2) - 10);
-
-				if (captured <= forest)
-				{
-					posX = rand() % mapX;
-					posY = rand() % (1 - (mapY / 2));
-				}
+				posX = rand() % (mapX/2);
+				posY = rand() % (mapY/2);
+			}
+			if (captured >= paleta)
+			{
+				posX =  rand() % mapX / 2;
+				posY = (mapY / 2) + rand() % (mapY / 2);
 			}
 			if (map[posX][posY] != 1 && map[posX][posY] != 3)
 			{
@@ -147,9 +146,9 @@ void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, i
 	if(posX != oldX and posY != oldY)
 	map[oldX][oldY] = 0;
 
-	for (int i = posXMin; i < mapX ; ++i)
+	for (int i = posXMin; i < posX +30 ; ++i)
 	{
-		for (int j = posYMin; j < mapY; ++j)
+		for (int j = posYMin; j < posY +30; ++j)
 		{
 			if (posX + 20 >= mapX)
 			{

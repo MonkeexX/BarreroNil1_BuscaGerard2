@@ -53,7 +53,7 @@ bool TakePokeball(int ** map, int posX, int posY, int pokeballs)
 	return true;
 }
 
-int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int& capturedPoke, int pikachu)
+int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int pikachu)
 {
 	std::cout << "Capturar: 3 \n Atacar: 4 \n Huir: 5 \n";
 	std::cin >> inputPlay;
@@ -95,7 +95,7 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int&
 	}
 }
 
-bool EnterCombat(int inputPlay, int posX, int posY, int capturedPoke, int** map, int pokeballs, int life, int pikachu)
+bool EnterCombat(int posX, int posY, int** map)
 {
 	//we will check every square next to the player
 	if (map[posX][++posY] == 2) //Hacia arriba
@@ -166,6 +166,45 @@ bool GetPokeball(int posX, int posY, int** map)
 		return true;
 	}
 	else if (map[--posX][++posY] == 3)
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+bool Mewtue(int posX, int posY, int** map)
+{
+	//we will check every square next to the player
+	if (map[posX][++posY] == 9) //Hacia arriba
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 9)
+	{
+		return true;
+	}
+	else if (map[++posX][posY] == 9)
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 9)
+	{
+		return true;
+	}
+	else if (map[posX][--posY] == 9)
+	{
+		return true;
+	}
+	else if (map[--posX][--posY] == 9)
+	{
+		return true;
+	}
+	else if (map[--posX][posY] == 9)
+	{
+		return true;
+	}
+	else if (map[--posX][++posY] == 9)
 	{
 		return true;
 	}

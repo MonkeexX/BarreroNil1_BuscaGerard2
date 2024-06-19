@@ -54,7 +54,7 @@ int main()
 	int minY = 0;
 	int maxX = 0;
 	int maxY = 0;
-	int pokeballs = 1;
+	int pokeballs = 200;
 	int oldX = 0;
 	int oldY = 0; 
 	int minimumTown = 0;
@@ -110,13 +110,14 @@ int main()
 					{
 						TakePokeball(mapa, characterX, characterY, pokeballs);
 					}
-					else if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
+					else if (EnterCombat(characterX, characterY, mapa))
 				    {
+
 					int life = pokeHealth;
 					bool combat = true;
 					while (combat == true)
 					{
-						int comand = Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
+						int comand = Combat(inputPlayer, pokeballs, life, characterX, characterY, mapa, pikachu);
 						switch (comand)
 						{
 						case 1:
@@ -163,6 +164,59 @@ int main()
 
 					}
 				}
+					else if (Mewtue(characterX, characterY, mapa))
+					{
+						int life = mewtwoHealth;
+						bool combat = true;
+						while (combat == true)
+						{
+							int comand = Combat(inputPlayer, pokeballs, life, characterX, characterY, mapa, pikachu);
+							switch (comand)
+							{
+							case 1:
+								++captured;
+								--pokeballs;
+								std::cout << "You captured pokemon" << endl;
+								mapa[X++][Y] = 0;
+								mapa[X--][Y] = 0;
+								mapa[X][Y++] = 0;
+								mapa[X][Y--] = 0;
+								combat = false;
+								break;
+
+							case 2:
+								std::cout << "You don't captured pokemon" << endl;
+								--pokeballs;
+								break;
+
+							case 3:
+								std::cout << "You don't have any pokeballs" << endl;
+								break;
+
+							case 4:
+								life -= pikachu;
+								std::cout << "pokemon life = " << life << endl;
+								if (life < 1)
+								{
+									std::cout << "You delet pokemon" << endl;
+
+									mapa[X++][Y] = 0;
+									mapa[X--][Y] = 0;
+									mapa[X][Y++] = 0;
+									mapa[X][Y--] = 0;
+
+									combat = false;
+								}
+								break;
+
+							case 5:
+								std::cout << "You run";
+								combat = false;
+								break;
+							}
+
+						}
+					}
 				
 			}
 			

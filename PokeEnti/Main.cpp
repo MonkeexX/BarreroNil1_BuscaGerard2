@@ -40,6 +40,7 @@ int main()
 	int forest = 7;
 	int cave = 8;
 	bool gameLoop = true;
+	bool mewtue = false;
 	bool inputPlayer = true;
 	bool playerWillPlay = true;
 	//To know the number of pokemon captured
@@ -110,7 +111,9 @@ int main()
 					{
 						TakePokeball(mapa, characterX, characterY, pokeballs);
 					}
-					else if (EnterCombat(characterX, characterY, mapa))
+					
+
+				    if (EnterCombat(characterX, characterY, mapa))
 				    {
 
 					int life = pokeHealth;
@@ -164,7 +167,8 @@ int main()
 
 					}
 				}
-					else if (Mewtue(characterX, characterY, mapa))
+					
+					if (Mewtue(characterX, characterY, mapa))
 					{
 						int life = mewtwoHealth;
 						bool combat = true;
@@ -176,29 +180,32 @@ int main()
 							case 1:
 								++captured;
 								--pokeballs;
-								std::cout << "You captured pokemon" << endl;
+								std::cout << "You captured Mewtue" << endl;
 								mapa[X++][Y] = 0;
 								mapa[X--][Y] = 0;
 								mapa[X][Y++] = 0;
 								mapa[X][Y--] = 0;
 								combat = false;
+								gameLoop = false;
+								mewtue = true;
 								break;
 
 							case 2:
-								std::cout << "You don't captured pokemon" << endl;
+								std::cout << "You don't captured Mewtue" << endl;
 								--pokeballs;
 								break;
 
 							case 3:
 								std::cout << "You don't have any pokeballs" << endl;
+								gameLoop = false;
 								break;
 
 							case 4:
 								life -= pikachu;
-								std::cout << "pokemon life = " << life << endl;
+								std::cout << "Mewtue life = " << life << endl;
 								if (life < 1)
 								{
-									std::cout << "You delet pokemon" << endl;
+									std::cout << "You delet Mewtue" << endl;
 
 									mapa[X++][Y] = 0;
 									mapa[X--][Y] = 0;
@@ -206,12 +213,14 @@ int main()
 									mapa[X][Y--] = 0;
 
 									combat = false;
+									gameLoop = false;
 								}
 								break;
 
 							case 5:
 								std::cout << "You run";
 								combat = false;
+								gameLoop = false;
 								break;
 							}
 
@@ -256,4 +265,6 @@ int main()
 		mapa = nullptr;
 
 	}
+
+	GameOver(mewtue);
 }

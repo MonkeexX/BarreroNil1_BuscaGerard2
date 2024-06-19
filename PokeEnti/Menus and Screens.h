@@ -26,9 +26,17 @@ bool MainMenu(int inputPlayerMenu, bool play)
 	}
 }
 
-void GameOver()
+void GameOver(bool mewtue)
 {
-	std::cout << "Game Over";
+	if (mewtue = true)
+	{
+		std::cout << "Alongside Mewtwo, Manish managed to easily defeat the champions Richard and Radef. -That Mewtwo is broken- they said while crying. And so, Manish became the champion of Enti. (Good Ending)";
+	}
+	else
+	{
+		std::cout << "Without Mewtwo, Manish lost disastrously. (Bad Ending)";
+	}
+	
 }
 
 void UI(int capturedPokemons, int pokeballs, int characterX, int characterY, int mapX, int mapY)

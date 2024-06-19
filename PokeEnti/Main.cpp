@@ -52,7 +52,13 @@ int main()
 	int maxTime;
 	int minX = 0;
 	int minY = 0;
+<<<<<<< HEAD
 	int pokeballs = 200;
+=======
+	int pokeballs = 1;
+	int oldX = 0;
+	int oldY = 0; 
+>>>>>>> origin/PlayerMovement
 	//Read from files
 	ifstream config;
 	config.open("config.txt", ios::in | ios::app);
@@ -68,6 +74,7 @@ int main()
 		config >> mewtwoHealth;
 		config >> minTime;
 		config >> maxTime;
+		config.close();
 	}
 	int** mapa = new int* [mapX + 40];
 	for (int i = 0; i < mapX; ++i)
@@ -75,25 +82,26 @@ int main()
 		mapa[i] = new int[mapY];
 	}
 	InitScreen();
-	MainMenu(inputPlayer, playerWillPlay);
+	playerWillPlay = MainMenu(inputPlayer, playerWillPlay);
 	if (playerWillPlay)
 	{
 		MapInitiation(mapa, mapY, mapX, characterX, characterY);
-		AddPokemonToMap(mapa, mapY, mapX);
+		AddPokemonToMap(mapa, mapY, mapX, captured, town, forest);
 		AddPokeballsToMap(mapa, mapY, mapX);
 
 		while (gameLoop)
 		{
+			UI(captured, pokeballs, characterX, characterY, mapX, mapY);
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
-			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY);
+			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, oldX, oldY);
 
-			std::cin >> input;
-			if (input == 10)
+			input = _getch();
+			if (input == 32)
 			{
-
-				if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
+				if (GetPokeball(characterX, characterY, mapa))
 				{
+<<<<<<< HEAD
 					bool combat = true;
 					while (combat == true)
 					{
@@ -140,25 +148,73 @@ int main()
 						}
 
 					}
+=======
+					TakePokeball(mapa, characterX, characterY, pokeballs);
+>>>>>>> origin/PlayerMovement
 				}
+				else if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
+				{
+					bool combat = true;
+					while (combat == true)
+					{
+						int comand = Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
+						switch (comand)
+						{
+						case 1:
+							++captured;
+							--pokeballs;
+							std::cout << "You captured pokemon" << endl;
+							combat = false;
+							break;
+
+						case 2:
+							std::cout << "You don't captured pokemon" << endl;
+							--pokeballs;
+							break;
+
+						case 3:
+							std::cout << "You don't have any pokeballs" << endl;
+							break;
+
+						case 4:
+							pokeHealth = -pikachu;
+							std::cout << "pokemon life = " << pokeHealth << endl;
+							if (pokeHealth < 1)
+							{
+								mapa[X++][Y] = 0;
+								mapa[X--][Y] = 0;
+								mapa[X][Y++] = 0;
+								mapa[X][Y--] = 0;
+								combat = false;
+							}
+							break;
+
+						case 5:
+							std::cout << "You run";
+							combat = false;
+							break;
+						}
+
+					}
+				}
+				
 			}
-			else if (input == 7 || input == 6 || input == 8 || input == 9)
+			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_LEFT)
 			{
+				oldX = characterX;
+				oldY = characterY;
 				switch (input)
 				{
-				case 6:
+				case KEY_UP:
 					characterY = CharacterMovement(input, characterX, characterY);
 					break;
-				case 7:
-					std::cout << characterY;
+				case KEY_DOWN:
 					characterY = CharacterMovement(input, characterX, characterY);
-					std::cout << characterY;
-
 					break;
-				case 8:
+				case KEY_RIGHT:
 					characterX = CharacterMovement(input, characterX, characterY);
 					break;
-				case 9:
+				case KEY_LEFT:
 					characterX = CharacterMovement(input, characterX, characterY);
 					break;
 				}

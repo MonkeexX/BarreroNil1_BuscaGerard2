@@ -30,7 +30,7 @@ void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int 
 
 	if (captured >= paleta)
 	{
-		for (int j = 0; j < (mapY / 2) - 10; j++)
+		for (int j = 0; j < (mapY / 2)-10; j++)
 		{
 			map[j][mapY / 2] = 0;
 		}
@@ -57,25 +57,47 @@ void UnlockZones(int captured, int paleta, int forest, int cave, int** map, int 
 
 }
 
-void AddPokemonToMap(int** map, int  mapY, int mapX)
+void AddPokemonToMap(int** map, int  mapY, int mapX, int captured, int paleta, int forest)
 {
+	int posX = 0;
+	int posY = 0;
+
+
+
 	//Pokemon = 2
 	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE; pokemonGenerated++)
 	{
-		int posX = rand() % mapX;
-		int posY = rand() % mapY;
-		if (map[posX][posY] != 1 && map[posX][posY] != 2)
+		bool hasGeneratedWell = false;
+
+
+		while (!hasGeneratedWell)
 		{
-			map[posX][posY] = 2;
+			if (captured <= paleta)
+			{
+				posX = rand() % (1 - (mapX / 2));
+				posY = rand() % (1 - (mapY / 2) - 10);
+
+				if (captured <= forest)
+				{
+					posX = rand() % mapX;
+					posY = rand() % (1 - (mapY / 2));
+				}
+			}
+			if (map[posX][posY] != 1 && map[posX][posY] != 3)
+			{
+				hasGeneratedWell = true;
+				map[posX][posY] = 2;
+			}
 		}
 	}
 }
 
-void AddPokeballsToMap(int** map, int mapX, int mapY)
+void AddPokeballsToMap(int** map, int characterX, int characterY)
 {
 	bool hasGeneratedWell = false;
-	int posX = rand() % mapX;
-	int posY = rand() % mapY;
+
+	int posX = rand() % characterX;
+	int posY = rand() % characterY;
 	while (!hasGeneratedWell)
 	{
 		if (map[posX][posY] != 1 && map[posX][posY] != 2)
@@ -86,7 +108,7 @@ void AddPokeballsToMap(int** map, int mapX, int mapY)
 	}
 }
 
-void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, int posYMin)
+void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, int posYMin, int oldX, int oldY)
 {
 
 	map[posX][posY] = 6;
@@ -106,6 +128,8 @@ void PrintMap(int** map, int  mapY, int mapX, int posX, int posY, int posXMin, i
 	{
 		posY = mapY;
 	}
+	map[oldX][oldY] = 0;
+
 	for (int i = posXMin; i < posX + 20; ++i)
 	{
 		for (int j = posYMin; j < posY + 20; ++j)

@@ -1,7 +1,7 @@
 #pragma once
 #include "Pokemon.h"
 
-int GetPokeball(int posX, int posY, int** map)
+bool GetPokeball(int posX, int posY, int** map)
 {
 	//we will check every square next to the player
 	int x;

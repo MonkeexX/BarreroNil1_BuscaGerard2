@@ -52,11 +52,16 @@ int main()
 	int maxTime;
 	int minX = 0;
 	int minY = 0;
+	int maxX = 0;
+	int maxY = 0;
 	int pokeballs = 1;
 	int oldX = 0;
 	int oldY = 0; 
 	int minimumTown = 0;
 	int minimumForest = 0;
+	int pokeballX = 0;
+	int pokeballY = 0;
+
 
 	//Read from files
 	ifstream config;
@@ -86,6 +91,8 @@ int main()
 	playerWillPlay = MainMenu(inputPlayer, playerWillPlay);
 	if (playerWillPlay)
 	{
+		maxX = mapX;
+		maxY = mapY;
 		MapInitiation(mapa, mapY, mapX, characterX, characterY);
 		AddPokemonToMap(mapa, mapY, mapX, captured, town, forest);
 		AddPokeballsToMap(mapa, mapY, mapX);
@@ -95,18 +102,15 @@ int main()
 			UI(captured, pokeballs, characterX, characterY, mapX, mapY);
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
-			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, oldX, oldY);
+			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, maxX, maxY, oldX, oldY);
+			
 
 			input = _getch();
 			if (input == 32)
 			{
 				if (GetPokeball(characterX, characterY, mapa))
 				{
-					TakePokeball(mapa, characterX, characterY, pokeballs);
-					if (TakePokeball(mapa, characterX, characterY, pokeballs))
-					{
-						AddPokeballsToMap(mapa, mapY, mapX);
-					}
+					pokeballs++;
 				}
 				else if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
 				{
@@ -163,16 +167,16 @@ int main()
 				switch (input)
 				{
 				case KEY_UP:
-					characterY = CharacterMovement(input, characterX, characterY);
+					characterY = CharacterMovement(input, characterX, characterY, mapa);
 					break;
 				case KEY_DOWN:
-					characterY = CharacterMovement(input, characterX, characterY);
+					characterY = CharacterMovement(input, characterX, characterY, mapa);
 					break;
 				case KEY_RIGHT:
-					characterX = CharacterMovement(input, characterX, characterY);
+					characterX = CharacterMovement(input, characterX, characterY, mapa);
 					break;
 				case KEY_LEFT:
-					characterX = CharacterMovement(input, characterX, characterY);
+					characterX = CharacterMovement(input, characterX, characterY, mapa);
 					break;
 				}
 			}

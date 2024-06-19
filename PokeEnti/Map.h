@@ -94,6 +94,11 @@ void AddPokemonToMap(int** map, int  mapY, int mapX, int captured, int paleta, i
 	}
 }
 
+int Random(int a, int top)
+{
+	a = rand() % top;
+	return a;
+}
 void AddPokeballsToMap(int** map, int characterX, int characterY)
 {
 	bool hasGeneratedWell = false;
@@ -108,9 +113,10 @@ void AddPokeballsToMap(int** map, int characterX, int characterY)
 			map[posX][posY] = 3;
 		}
 	}
+
 }
 
-void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, int posYMin, int oldX, int oldY)
+void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, int posYMin, int posXMax, int posYMax, int oldX, int oldY)
 {
 
 	map[posX][posY] = 6;
@@ -122,20 +128,37 @@ void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, i
 	{
 		posYMin = 0;
 	}
-	if (posX > mapX)
+	if (posXMin < 0)
 	{
-		posX = mapX;
+		posXMin = 0;
 	}
-	if (posY > mapY)
+	if (posYMin < 0)
 	{
-		posY = mapY;
+		posYMin = 0;
 	}
+	if (posX >= mapX)
+	{
+		posXMax = mapX;
+	}
+	if (posY >= mapY)
+	{
+		posYMax = mapY;
+	}
+	if(posX != oldX and posY != oldY)
 	map[oldX][oldY] = 0;
 
-	for (int i = posXMin; i < posX + 20; ++i)
+	for (int i = posXMin; i < mapX ; ++i)
 	{
-		for (int j = posYMin; j < posY + 20; ++j)
+		for (int j = posYMin; j < mapY; ++j)
 		{
+			if (posX + 20 >= mapX)
+			{
+				posX = mapX;
+			}
+			if (posY + 20 >= mapY)
+			{
+				posY = mapY;
+			}
 			if (map[i][j] == 1)
 			{
 				std::cout << "X";
@@ -171,7 +194,7 @@ void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, i
 			}
 			else if (map[i][j] == 0)
 			{
-				std::cout << " ";
+				std::cout << "-";
 			}
 		}
 

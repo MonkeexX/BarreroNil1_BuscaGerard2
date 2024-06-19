@@ -11,33 +11,23 @@
 #define KEY_SPACE 32
 int CharacterMovement(int input, int characterX, int characterY, int** mapa)
 {
-
+	//
 	switch (input)
 	{
 	case KEY_UP: // up
-		if (mapa[characterX][--characterY] == 1)
-			return ++characterY;
-		else 
-			return characterY;
-
+			return --characterY;
 		break;
 	case KEY_DOWN: //down
-		if (mapa[characterX][++characterY] == 1)
-			characterY--;
-			return characterY;
+			return ++characterY;
 
 		break;
 	case KEY_RIGHT: // right
-		if(mapa[++characterX][characterY] == 1)
-		return --characterX;
-		else
+		return ++characterX;
+
 			return characterX;
 		break;
 	case KEY_LEFT: //left
-		if (mapa[--characterX][characterY] == 1)
-		return ++characterX;
-		else
-			return characterX;
+			return --characterX;
 		break;
 	}
 }

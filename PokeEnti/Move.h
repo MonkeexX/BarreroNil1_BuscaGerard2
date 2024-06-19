@@ -10,8 +10,6 @@
 #define KEY_LEFT 75
 #define KEY_SPACE 32
 
-
-
 int CharacterMovement(int input, int characterX, int characterY)
 {
 
@@ -33,22 +31,22 @@ int CharacterMovement(int input, int characterX, int characterY)
 	}
 }
 
-std::string DetectZone(int mapX, int mapY)
+std::string DetectZone(int mapX, int mapY, int characterX, int characterY)
 {
-	if (mapY <= (mapY / 2) && mapX <= (mapX/2))
-	{
-		return "Cueva Celeste";
-	}
-	else if (mapY < (mapY / 2) && mapX > (mapX / 2))
-	{
-		return "Liga PokEnti";
-	}
-	else if (mapY > (mapY / 2) && mapX > (mapX / 2))
+	if (characterY <= (mapY / 2) && characterX <= (mapX/2))
 	{
 		return "Pueblo Paleta";
 	}
-	else if (mapY > (mapY / 2) && mapX <= (mapX / 2))
+	else if (characterY < (mapY / 2) && characterX > (mapX / 2))
 	{
 		return "Bosque";
+	}
+	else if (characterY > (mapY / 2) && characterX > (mapX / 2))
+	{
+		return "Cueva Celeste";
+	}
+	else if (characterY > (mapY / 2) && characterX <= (mapX / 2))
+	{
+		return "Liga PokeEnti";
 	}
 }

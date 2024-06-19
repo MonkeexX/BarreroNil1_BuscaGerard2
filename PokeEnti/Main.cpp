@@ -78,16 +78,16 @@ int main()
 		mapa[i] = new int[mapY];
 	}
 	InitScreen();
-	MainMenu(inputPlayer, playerWillPlay);
+	playerWillPlay = MainMenu(inputPlayer, playerWillPlay);
 	if (playerWillPlay)
 	{
 		MapInitiation(mapa, mapY, mapX, characterX, characterY);
-		AddPokemonToMap(mapa, mapY, mapX);
+		AddPokemonToMap(mapa, mapY, mapX, captured, town, forest);
 		AddPokeballsToMap(mapa, mapY, mapX);
 
 		while (gameLoop)
 		{
-			UI(captured, pokeballs, characterX, characterY);
+			UI(captured, pokeballs, characterX, characterY, mapX, mapY);
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
 			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, oldX, oldY);
@@ -95,8 +95,11 @@ int main()
 			input = _getch();
 			if (input == 32)
 			{
-
-				if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
+				if (GetPokeball(characterX, characterY, mapa))
+				{
+					TakePokeball(mapa, characterX, characterY, pokeballs);
+				}
+				else if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
 				{
 					bool combat = true;
 					while (combat == true)
@@ -117,7 +120,7 @@ int main()
 							break;
 
 						case 3:
-							std::cout << "You don't have pokeballs" << endl;
+							std::cout << "You don't have any pokeballs" << endl;
 							break;
 
 						case 4:

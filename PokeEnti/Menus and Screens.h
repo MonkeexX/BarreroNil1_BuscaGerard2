@@ -6,7 +6,7 @@ void InitScreen()
 	Sleep(3000);
 }
 
-void MainMenu(int inputPlayerMenu, bool play)
+bool MainMenu(int inputPlayerMenu, bool play)
 {
 	bool isInMenu = true;
 	std::cout << "PRESS 1 TO PLAY\n PRESS 0 TO EXIT" << std::endl;
@@ -16,12 +16,12 @@ void MainMenu(int inputPlayerMenu, bool play)
 		if (inputPlayerMenu == 1)
 		{
 			play = true;
-			isInMenu = false;
+			return true;
 		}
 		else if (inputPlayerMenu == 0)
 		{
 			play = false;
-			isInMenu = false;
+			return false;
 		}
 	}
 }
@@ -31,9 +31,9 @@ void GameOver()
 	std::cout << "Game Over";
 }
 
-void UI(int capturedPokemons, int pokeballs, int mapX, int mapY)
+void UI(int capturedPokemons, int pokeballs, int characterX, int characterY, int mapX, int mapY)
 {
 	std::cout << "Pokemons Capturados: " << capturedPokemons << "      Pokeballs: " << pokeballs << std::endl;
-	std::string currentZone = DetectZone(mapX, mapY);
+	std::string currentZone = DetectZone(mapX, mapY,characterX, characterY);
 	std::cout << currentZone << std::endl;
 }

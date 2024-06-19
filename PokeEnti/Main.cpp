@@ -101,7 +101,7 @@ int main()
 		{
 			UI(captured, pokeballs, characterX, characterY, mapX, mapY);
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
-			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, oldX, oldY);
+			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY,maxX,maxY, oldX, oldY);
 
 			input = _getch();
 			if (input == KEY_SPACE)
@@ -123,6 +123,10 @@ int main()
 							++captured;
 							--pokeballs;
 							std::cout << "You captured pokemon" << endl;
+							mapa[X++][Y] = 0;
+							mapa[X--][Y] = 0;
+							mapa[X][Y++] = 0;
+							mapa[X][Y--] = 0;
 							combat = false;
 							break;
 

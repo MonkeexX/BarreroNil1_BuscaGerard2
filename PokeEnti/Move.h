@@ -11,7 +11,7 @@
 #define KEY_SPACE 32
 int CharacterMovement(int input, int characterX, int characterY, int** mapa)
 {
-	//
+
 	switch (input)
 	{
 	case KEY_UP: // up

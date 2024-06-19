@@ -22,7 +22,7 @@ void MapInitiation(int** map, int  mapY, int mapX, int characterX, int character
 			map[j][mapY / 2] = 1;
 		}
 	}
-	map[characterX][characterY] = 6;
+	map[characterX][characterY] = 6; //This the character
 
 	map[mapX - 5][mapY - 5] = 9; //Mewtwo appears
 }
@@ -66,7 +66,7 @@ void AddPokemonToMap(int** map, int  mapY, int mapX, int captured, int paleta, i
 
 
 
-	//Pokemon = 2
+	//Pokemon is a 2
 	for (int pokemonGenerated = 0; pokemonGenerated < MAXPOKE; pokemonGenerated++)
 	{
 		bool hasGeneratedWell = false;
@@ -118,7 +118,7 @@ void AddPokeballsToMap(int** map, int characterX, int characterY)
 void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, int posYMin, int posXMax, int posYMax, int oldX, int oldY)
 {
 
-	map[posX][posY] = 6;
+	map[posX][posY] = 6; // This is the character updater
 	if (posXMin < 0)
 	{
 		posXMin = 0;
@@ -144,7 +144,7 @@ void PrintMap(int** map, int  mapY, int mapX, int posY, int posX, int posXMin, i
 		posYMax = mapY;
 	}
 	if(posX != oldX and posY != oldY)
-	map[oldX][oldY] = 0;
+	map[oldX][oldY] = 0; // This is to delete the old position
 
 	for (int i = posXMin; i < posX +30 ; ++i)
 	{

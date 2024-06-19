@@ -5,7 +5,7 @@ enum class Nature {
 	TRANQUILA, //Horizontal
 	PICARA, //Diagonal
 	FUERTE, //Vertical
-	INVALID
+	INVALID //invalid
 };
 
 class Pokemon
@@ -42,6 +42,7 @@ public:
 		bool directionY = rand() % 1;
 		if (nature == Nature::TRANQUILA)
 		{
+			//It only can move horizontal
 			if (directionX == true)
 			{
 				posX++;
@@ -50,7 +51,7 @@ public:
 				posX--;
 		}
 		else if (nature == Nature::PICARA)
-		{
+		{ //Moves in diagonal
 			if (directionX == true)
 			{
 				posX++;
@@ -66,6 +67,7 @@ public:
 		}
 		else if (nature == Nature::FUERTE)
 		{
+			//Moves vertical
 			if (directionY == true)
 			{
 				posY++;

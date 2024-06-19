@@ -23,9 +23,9 @@ int main()
 {
 	int mapX = 0;
 	int mapY = 0;
-	//srand(time(NULL));
 
-	int X = 10, Y = 10; // Min position of player is 5, 5
+
+	int X = 10, Y = 10;
 
 	int input = 0;
 	int move;
@@ -89,8 +89,9 @@ int main()
 	}
 	InitScreen();
 	playerWillPlay = MainMenu(inputPlayer, playerWillPlay);
-	if (playerWillPlay)
+	if (playerWillPlay) //Player will play is for toe game loop
 	{
+		//We iniciate all the map
 		maxX = mapX;
 		maxY = mapY;
 		MapInitiation(mapa, mapY, mapX, characterX, characterY);
@@ -99,12 +100,13 @@ int main()
 
 		while (gameLoop)
 		{
+			//print
 			UI(captured, pokeballs, characterX, characterY, mapX, mapY);
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
 			PrintPokemonNum(captured);
 			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, maxX, maxY, oldX, oldY);
 			
-
+			//Calculate
 			input = _getch();
 			if (input == 32)
 			{
@@ -186,6 +188,7 @@ int main()
 	}
 	if (!playerWillPlay)
 	{
+		//if the game ends or the player wants to leave
 
 		for (int i = 0; i < mapX; ++i)
 		{

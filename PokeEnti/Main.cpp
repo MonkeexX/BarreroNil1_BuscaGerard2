@@ -58,7 +58,9 @@ int main()
 	int pokeballs = 1;
 	int oldX = 0;
 	int oldY = 0; 
->>>>>>> origin/PlayerMovement
+	int minimumTown = 0;
+	int minimumForest = 0;
+
 	//Read from files
 	ifstream config;
 	config.open("config.txt", ios::in | ios::app);
@@ -67,7 +69,9 @@ int main()
 		config >> mapX;
 		config >> mapY;
 		config >> town;
+		config >> minimumTown;
 		config >> forest;
+		config >> minimumForest;
 		config >> cave;
 		config >> pikachu;
 		config >> pokeHealth;
@@ -150,10 +154,14 @@ int main()
 					}
 =======
 					TakePokeball(mapa, characterX, characterY, pokeballs);
->>>>>>> origin/PlayerMovement
+					if (TakePokeball(mapa, characterX, characterY, pokeballs))
+					{
+						AddPokeballsToMap(mapa, mapY, mapX);
+					}
 				}
 				else if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
 				{
+					int life = pokeHealth;
 					bool combat = true;
 					while (combat == true)
 					{
@@ -177,9 +185,9 @@ int main()
 							break;
 
 						case 4:
-							pokeHealth = -pikachu;
-							std::cout << "pokemon life = " << pokeHealth << endl;
-							if (pokeHealth < 1)
+							life -= pikachu;
+							std::cout << "pokemon life = " << life << endl;
+							if (life < 1)
 							{
 								mapa[X++][Y] = 0;
 								mapa[X--][Y] = 0;

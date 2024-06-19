@@ -1,6 +1,62 @@
 #pragma once
 #include "Pokemon.h"
 
+bool GetPokeball(int posX, int posY, int** map)
+{
+	//we will check every square next to the player
+	int x;
+	int y;
+	if (map[posX][++posY] == 3) //Hacia arriba
+	{
+		x = posX;
+		y = ++posY;
+		return true;
+	}
+	else if (map[++posX][--posY] == 3)
+	{
+		x = ++posX;
+		y = ++posY;
+		return true;
+	}
+	else if (map[++posX][posY] == 3)
+	{
+		x = ++posX;
+		y = posY;
+		return true;
+	}
+	if (map[++posX][--posY] == 3)
+	{
+		x = ++posX;
+		y = --posY;
+		return true;
+	}
+	else if (map[posX][--posY] == 3)
+	{
+		x = posX;
+		y = --posY;
+		return true;
+	}
+	else if (map[--posX][--posY] == 3)
+	{
+		x = --posX;
+		y = --posY;
+		return true;
+	}
+	else if (map[--posX][posY] == 3)
+	{
+		x = --posX;
+		y = posY;
+		return true;
+	}
+	else if (map[--posX][++posY] == 3)
+	{
+		x = --posX;
+		y = ++posY;
+		return true;
+	}
+	else
+		return false;
+}
 bool TakePokeball(int ** map, int posX, int posY, int pokeballs)
 {
 	if (map[posX][++posY] == 3)

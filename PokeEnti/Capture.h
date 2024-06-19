@@ -1,62 +1,6 @@
 #pragma once
 #include "Pokemon.h"
 
-int GetPokeball(int posX, int posY, int** map)
-{
-	//we will check every square next to the player
-	int x;
-	int y;
-	if (map[posX][++posY] == 3) //Hacia arriba
-	{
-		x = posX;
-		y = ++posY;
-		return true;
-	}
-	else if (map[++posX][--posY] == 3)
-	{
-		x = ++posX;
-		y = ++posY;
-		return true;
-	}
-	else if (map[++posX][posY] == 3)
-	{
-		x = ++posX;
-		y = posY;
-		return true;
-	}
-	if (map[++posX][--posY] == 3)
-	{
-		x = ++posX;
-		y = --posY;
-		return true;
-	}
-	else if (map[posX][--posY] == 3)
-	{
-		x = posX;
-		y = --posY;
-		return true;
-	}
-	else if (map[--posX][--posY] == 3)
-	{
-		x = --posX;
-		y = --posY;
-		return true;
-	}
-	else if (map[--posX][posY] == 3)
-	{
-		x = --posX;
-		y = posY;
-		return true;
-	}
-	else if (map[--posX][++posY] == 3)
-	{
-		x = --posX;
-		y = ++posY;
-		return true;
-	}
-	else
-		return false;
-}
 bool TakePokeball(int ** map, int posX, int posY, int pokeballs)
 {
 	if (map[posX][++posY] == 3)
@@ -153,65 +97,78 @@ int Combat(int inputPlay, int pokeballs, int life, int x, int y, int** map, int&
 
 bool EnterCombat(int inputPlay, int posX, int posY, int capturedPoke, int** map, int pokeballs, int life, int pikachu)
 {
-	bool isTherePokemon = false;
 	//we will check every square next to the player
-	int x;
-	int y;
 	if (map[posX][++posY] == 2) //Hacia arriba
 	{
-		x = posX;
-		y = ++posY;
-		isTherePokemon = true;
+		return true;
 	}
 	else if (map[++posX][--posY] == 2)
 	{
-		x = ++posX;
-		y = ++posY;
-		isTherePokemon = true;
-	}
-	if (map[++posX][posY] == 2)
-	{
-		x = ++posX;
-		y = posY;
-		isTherePokemon = true;
-	}
-	if (map[++posX][--posY] == 2)
-	{
-		x = ++posX;
-		y = --posY;
-		isTherePokemon = true;
-	}
-	if (map[posX][--posY] == 2)
-	{
-		x = posX;
-		y = --posY;
-		isTherePokemon = true;
-	}
-	if (map[--posX][--posY] == 2)
-	{
-		x = --posX;
-		y = --posY;
-		isTherePokemon = true;
-	}
-	if (map[--posX][posY] == 2)
-	{
-		x = --posX;
-		y = posY;
-		isTherePokemon = true;
-	}
-	if (map[--posX][++posY] == 2)
-	{
-		x = --posX;
-		y = ++posY;
-		isTherePokemon = true;
-	}
-	if (isTherePokemon)
 		return true;
+	}
+	else if (map[++posX][posY] == 2)
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 2)
+	{
+		return true;
+	}
+	else if (map[posX][--posY] == 2)
+	{
+		return true;
+	}
+	else if (map[--posX][--posY] == 2)
+	{
+		return true;
+	}
+	else if (map[--posX][posY] == 2)
+	{
+		return true;
+	}
+	else if (map[--posX][++posY] == 2)
+	{
+		return true;
+	}
 	else
 		return false;
 }
 
-void PrintPokemonNum(int captured)
+int GetPokeball(int posX, int posY, int** map)
 {
-	std::cout << "Number of Pokemon captured: " << captured << std::endl;
+	//we will check every square next to the player
+	if (map[posX][++posY] == 3) //Hacia arriba
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 3)
+	{
+		return true;
+	}
+	else if (map[++posX][posY] == 3)
+	{
+		return true;
+	}
+	else if (map[++posX][--posY] == 3)
+	{
+		return true;
+	}
+	else if (map[posX][--posY] == 3)
+	{
+		return true;
+	}
+	else if (map[--posX][--posY] == 3)
+	{
+		return true;
+	}
+	else if (map[--posX][posY] == 3)
+	{
+		return true;
+	}
+	else if (map[--posX][++posY] == 3)
+	{
+		return true;
+	}
+	else
+		return false;
 }

@@ -52,9 +52,6 @@ int main()
 	int maxTime;
 	int minX = 0;
 	int minY = 0;
-<<<<<<< HEAD
-	int pokeballs = 200;
-=======
 	int pokeballs = 1;
 	int oldX = 0;
 	int oldY = 0; 
@@ -97,70 +94,18 @@ int main()
 		{
 			UI(captured, pokeballs, characterX, characterY, mapX, mapY);
 			UnlockZones(captured, town, forest, cave, mapa, mapX, mapY);
-			PrintPokemonNum(captured);
 			PrintMap(mapa, mapY, mapX, characterX, characterY, minX, minY, oldX, oldY);
 
 			input = _getch();
-			if (input == 32)
+			if (input == KEY_SPACE)
 			{
-				if (GetPokeball(characterX, characterY, mapa))
-				{
-<<<<<<< HEAD
-					bool combat = true;
-					while (combat == true)
+					if (GetPokeball(characterX, characterY, mapa))
 					{
-						int comand = Combat(inputPlayer, pokeballs, pokeHealth, characterX, characterY, mapa, captured, pikachu);
-						switch (comand)
-						{
-						case 1:
-							++captured;
-							--pokeballs;
-							mapa[X++][Y] = 0;
-							mapa[X--][Y] = 0;
-							mapa[X][Y++] = 0;
-							mapa[X][Y--] = 0;
-							std::cout << "You captured pokemon"<< endl;
-							combat = false;
-						    break;
-						
-						case 2:
-							std::cout << "You don't captured pokemon"<<endl;
-							--pokeballs;
-						    break;
-
-						case 3:
-							std::cout << "You don't have pokeballs"<<endl;
-							break;
-
-						case 4:
-							pokeHealth = -pikachu;
-							std::cout << "pokemon life = " << pokeHealth << endl;
-							if (pokeHealth < 1)
-							{
-								mapa[X++][Y] = 0;
-								mapa[X--][Y] = 0;
-								mapa[X][Y++] = 0;
-								mapa[X][Y--] = 0;
-								combat = false;
-							}
-							break;
-
-						case 5:
-							std::cout << "You run";
-							combat = false;
-							break;
-						}
-
+						TakePokeball(mapa, characterX, characterY, pokeballs);
 					}
-=======
-					TakePokeball(mapa, characterX, characterY, pokeballs);
-					if (TakePokeball(mapa, characterX, characterY, pokeballs))
-					{
-						AddPokeballsToMap(mapa, mapY, mapX);
-					}
-				}
-				else if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
-				{
+			   
+					if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
+				    {
 					int life = pokeHealth;
 					bool combat = true;
 					while (combat == true)
@@ -207,7 +152,8 @@ int main()
 				}
 				
 			}
-			else if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_LEFT)
+			
+			if (input == KEY_UP || input == KEY_DOWN || input == KEY_RIGHT || input == KEY_LEFT)
 			{
 				oldX = characterX;
 				oldY = characterY;
@@ -227,10 +173,11 @@ int main()
 					break;
 				}
 			}
-			Sleep(1000);
+			Sleep(10);
 			system("cls");
 		}
 	}
+	
 	if (!playerWillPlay)
 	{
 

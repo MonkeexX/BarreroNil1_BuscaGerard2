@@ -103,8 +103,7 @@ int main()
 					{
 						TakePokeball(mapa, characterX, characterY, pokeballs);
 					}
-			   
-					if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
+					else if (EnterCombat(inputPlayer, characterX, characterY, pokeCach, mapa, pokeCach, pokeHealth, pikachu))
 				    {
 					int life = pokeHealth;
 					bool combat = true;
@@ -134,10 +133,13 @@ int main()
 							std::cout << "pokemon life = " << life << endl;
 							if (life < 1)
 							{
+							std::cout << "You delet pokemon"<< endl;
+
 								mapa[X++][Y] = 0;
 								mapa[X--][Y] = 0;
 								mapa[X][Y++] = 0;
 								mapa[X][Y--] = 0;
+								
 								combat = false;
 							}
 							break;
